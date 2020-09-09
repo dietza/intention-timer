@@ -18,8 +18,32 @@ body {
   margin: 0;
 }
 
+nav {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+h2 {
+  font-weight: 300;
+}
+
+h3 {
+  padding: 20px 20px 0px 20px;
+}
+
 h2, h3, h4, p {
   margin: 0;
+}
+
+.no-activity-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px 30px 30px 0px;
+  font-size: 12px;
+  width: 100%;
 }
 
 main {
@@ -28,8 +52,12 @@ main {
 }
 
 .new-activity-section {
-  width: 65%;
+  width: 100%;
   border-right: solid #46424D 2px;
+}
+
+.past-activities-section {
+  min-width: 35%;
 }
 
 .new-activity-card {
@@ -39,7 +67,7 @@ main {
   padding-bottom: 40px;
   padding-left: 80px;
   padding-right: 80px;
-  margin: 20px;
+  margin: 10px 20px 20px 20px;
   border-radius: 5px;
   box-shadow: 8px 8px 6px -6px black;
   }
