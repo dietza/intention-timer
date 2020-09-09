@@ -77,15 +77,15 @@ main {
 }
 
 .study-green {
-  color: #B3FD78;
+  background-color: #B3FD78;
 }
 
 .meditate-purple {
-  color: #C278FD;
+  background-color: #C278FD;
 }
 
 .exercise-red {
-  color: #FD8078;
+  background-color: #FD8078;
 }
 
 .error-pink {
