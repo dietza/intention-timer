@@ -6,10 +6,8 @@ newActivityCard.addEventListener('click', selectActivity);
 
 function selectActivity(event) {
   if (event.target.closest('.study-button')) {
-    console.log("Hello");
+    event.target.closest('.study-button').classList.add('study-green');
   } else if (event.target.closest('.meditate-button')) {
-    console.log("hi");
   } else if (event.target.closest('.exercise-button')) {
-    console.log("hey");
   }
 }

@@ -80,6 +80,22 @@ main {
   background-color: #46424D;
 }
 
+.study-green {
+  color: #B3FD78;
+}
+
+.meditate-purple {
+  color: #C278FD;
+}
+
+.exercise-red {
+  color: #FD8078;
+}
+
+.error-pink {
+  color: #EFB7EC;
+}
+
 .dark-text {
   color: #CBC9CF;
 }
