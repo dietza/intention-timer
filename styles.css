@@ -11,6 +11,11 @@ Error: #EFB7EC */
 body {
   font-family: 'Montserrat', sans-serif;
   color: #FFF;
+  margin: 0;
+}
+
+h2, h3, p {
+  margin: 0;
 }
 
 .dark-grey {
@@ -23,4 +28,27 @@ body {
 
 .dark-text {
   color: #CBC9CF;
+}
+
+.start-activity-button {
+  background-color: #FFF;
+  color: #46424D;
+}
+
+.intention-input {
+  border-color: #FFF;
+  color: #FFF;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  outline: none;
+}
+
+.time-input {
+  border-color: #FFF;
+  color: #FFF;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  outline: none;
 }
