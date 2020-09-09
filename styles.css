@@ -8,15 +8,41 @@ Meditate: #C278FD
 Exercise: #FD8078
 Error: #EFB7EC */
 
+/* html {
+  height: 100%;
+} */
+
 body {
   font-family: 'Montserrat', sans-serif;
   color: #FFF;
   margin: 0;
 }
 
-h2, h3, p {
+h2, h3, h4, p {
   margin: 0;
 }
+
+main {
+  display: flex;
+  flex-direction: row;
+}
+
+.new-activity-section {
+  width: 65%;
+  border-right: solid #46424D 2px;
+}
+
+.new-activity-card {
+  display: flex;
+  flex-direction: column;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  padding-left: 80px;
+  padding-right: 80px;
+  margin: 20px;
+  border-radius: 5px;
+  box-shadow: 8px 8px 6px -6px black;
+  }
 
 .dark-grey {
   background-color: #2B2733;
@@ -30,11 +56,6 @@ h2, h3, p {
   color: #CBC9CF;
 }
 
-.start-activity-button {
-  background-color: #FFF;
-  color: #46424D;
-}
-
 .intention-input {
   border-color: #FFF;
   color: #FFF;
@@ -42,6 +63,11 @@ h2, h3, p {
   border-right: none;
   border-left: none;
   outline: none;
+  width: 100%;
+}
+
+.intention-section {
+  margin-top: 30px;
 }
 
 .time-input {
@@ -51,4 +77,54 @@ h2, h3, p {
   border-right: none;
   border-left: none;
   outline: none;
+  width: 100%;
+
+}
+
+.time-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 30px;
+  margin-bottom: 30px:
+}
+
+.minsec {
+  width: 40%;
+}
+
+.category-icons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.category-button {
+  font-family: 'Montserrat', sans-serif;
+  color: #FFF;
+  border: solid #FFF 2px;
+  border-radius: 5px;
+  height: 50px;
+  width: 100px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.category-image {
+  height: 20px;
+  width: 20px;
+}
+
+.start-activity-button {
+  background-color: #FFF;
+  color: #46424D;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: 33%;
+  padding: 5px;
+  align-self: flex-end;
+  border-radius: 5px;
+  border: none;
 }
