@@ -52,16 +52,38 @@ function addButtonColor(selectedButton, selectedColor, selectedIcon) {
 }
 
 function handleActivitySubmit() {
-  if (intentionInput.value !== '' && (minutesInput.value !== '' && secondsInput.value !== '')){
-    createNewActivity();
+  if (intentionInput.value === '') {
+    showIntentionError()
+  } else if (minutesInput.value === '' && secondsInput.value === '') {
+    showTimeError();
   } else {
-    handleErrorMessages();
+    createNewActivity();
   }
+}
+
+function showIntentionError() {
+  var intentionError =
+    `<div class='error-message'>
+      <img src='./assets/warning.svg' class='error-icon'>
+      <p>A description is required.</p>
+    </div>`;
+  intentionInput.insertAdjacentHTML('afterend', intentionError);
+  intentionInput.classList.add('error-pink');
+}
+
+function showTimeError() {
+  var timeError =
+    `<div class='error-message'>
+      <img src='./assets/warning.svg' class='error-icon'>
+      <p>A time value is required.</p>
+    </div>`;
+    document.querySelector('.time-section').insertAdjacentHTML('afterend', timeError);
+    minutesInput.classList.add('error-pink');
+    secondsInput.classList.add('error-pink');
 }
 
 function createNewActivity() {
   var selectedActivity;
-
   for (var i=0; i < categoryButton.length; i++) {
     if (categoryButton[i].children[0].src.includes('study-active')){
       selectedActivity = 'Study';
@@ -72,25 +94,4 @@ function createNewActivity() {
     }
   }
   currentActivity = new Activity (selectedActivity, intentionInput.value, minutesInput.value, secondsInput.value)
-}
-
-function handleErrorMessages() {
-  var intentionError =
-    `<div class='error-message'>
-      <img src='./assets/warning.svg' class='error-icon'>
-      <p>A description is required.</p>
-    </div>`;
-  var timeError =
-    `<div class='error-message'>
-      <img src='./assets/warning.svg' class='error-icon'>
-      <p>A time value is required.</p>
-    </div>`;
-  if (intentionInput.value === '') {
-    intentionInput.insertAdjacentHTML('afterend', intentionError);
-    intentionInput.classList.add('error-pink');
-  } else if (minutesInput.value === '' && secondsInput.value === '') {
-    document.querySelector('.time-section').insertAdjacentHTML('afterend', timeError);
-    minutesInput.classList.add('error-pink');
-    secondsInput.classList.add('error-pink');
-  }
 }
