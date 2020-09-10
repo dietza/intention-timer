@@ -7,20 +7,33 @@ categoryButton[1].addEventListener('click', handleMeditateButton);
 categoryButton[2].addEventListener('click', handleExerciseButton);
 
 function handleStudyColor() {
-  addButtonColor(categoryButton[0], 'study-green', "./assets/study-active.svg");
+  resetButtonColor(categoryButton[0], 'study-green', "./assets/study-active.svg");
 }
 
 function handleMeditateButton() {
-  addButtonColor(categoryButton[1], 'meditate-purple', "./assets/meditate-active.svg");
+  resetButtonColor(categoryButton[1], 'meditate-purple', "./assets/meditate-active.svg");
 }
 
 function handleExerciseButton() {
-  addButtonColor(categoryButton[2], 'exercise-red', "./assets/exercise-active.svg");
+  resetButtonColor(categoryButton[2], 'exercise-red', "./assets/exercise-active.svg");
 }
 
-function addButtonColor(button, color, icon) {
-  button.classList.add(color);
-  button.children[1].classList.add(color);
-  button.children[0].src = icon
-  removeButtonColor();
+function resetButtonColor(button, color, icon) {
+  categoryButton[0].classList.remove('study-green');
+  categoryButton[0].children[1].classList.remove('study-green');
+  categoryButton[0].children[0].src = './assets/study.svg';
+  categoryButton[1].classList.remove('meditate-purple');
+  categoryButton[1].children[1].classList.remove('meditate-purple');
+  categoryButton[1].children[0].src = './assets/meditate.svg';
+  categoryButton[2].classList.remove('exercise-red');
+  categoryButton[2].children[1].classList.remove('exercise-red');
+  categoryButton[2].children[0].src = './assets/exercise.svg';
+  addButtonColor(button, color, icon)
+}
+
+
+function addButtonColor(selectedButton, selectedColor, selectedIcon) {
+  selectedButton.classList.add(selectedColor);
+  selectedButton.children[1].classList.add(selectedColor);
+  selectedButton.children[0].src = selectedIcon;
 }
