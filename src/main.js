@@ -1,27 +1,26 @@
-var newActivityCard = document.querySelector('.new-activity-card');
-var studyButton = document.querySelector('.study-button');
-var meditateButton = document.querySelector('.meditate-button');
-var exerciseButton = document.querySelector('.exercise-button');
+var categoryButton = document.querySelectorAll('.category-button');
 
 var currentActivity;
 
-studyButton.addEventListener('click', handleStudyColor);
-meditateButton.addEventListener('click', handleMeditateButton);
-exerciseButton.addEventListener('click', handleExerciseButton);
-
+categoryButton[0].addEventListener('click', handleStudyColor);
+categoryButton[1].addEventListener('click', handleMeditateButton);
+categoryButton[2].addEventListener('click', handleExerciseButton);
 
 function handleStudyColor() {
-  toggleButtonColor(studyButton, 'study-green');
+  addButtonColor(categoryButton[0], 'study-green', "./assets/study-active.svg");
 }
 
 function handleMeditateButton() {
-  toggleButtonColor(meditateButton, 'meditate-purple');
+  addButtonColor(categoryButton[1], 'meditate-purple', "./assets/meditate-active.svg");
 }
 
 function handleExerciseButton() {
-  toggleButtonColor(exerciseButton, 'exercise-red');
+  addButtonColor(categoryButton[2], 'exercise-red', "./assets/exercise-active.svg");
 }
 
-function toggleButtonColor(button, color) {
+function addButtonColor(button, color, icon) {
   button.classList.add(color);
+  button.children[1].classList.add(color);
+  button.children[0].src = icon
+  removeButtonColor();
 }

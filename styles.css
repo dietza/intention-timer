@@ -76,26 +76,6 @@ main {
   background-color: #46424D;
 }
 
-.study-green {
-  background-color: #B3FD78;
-}
-
-.meditate-purple {
-  background-color: #C278FD;
-}
-
-.exercise-red {
-  background-color: #FD8078;
-}
-
-.error-pink {
-  color: #EFB7EC;
-}
-
-.dark-text {
-  color: #CBC9CF;
-}
-
 .intention-input {
   border-color: #FFF;
   color: #FFF;
@@ -155,6 +135,7 @@ main {
 .category-image {
   height: 20px;
   width: 20px;
+  fill: #B3FD78;
 }
 
 .start-activity-button {
@@ -163,8 +144,30 @@ main {
   margin-top: 30px;
   margin-bottom: 30px;
   width: 33%;
-  padding: 5px;
+  padding: 5px;,
   align-self: flex-end;
   border-radius: 5px;
   border: none;
+}
+.study-green {
+  border-color: #B3FD78;
+  color: #B3FD78;
+}
+
+.meditate-purple {
+  border-color: #C278FD;
+  color: #C278FD;
+}
+
+.exercise-red {
+  border-color: #FD8078;
+  color: #FD8078;
+}
+
+.error-pink {
+  color: #EFB7EC;
+}
+
+.dark-text {
+  color: #CBC9CF;
 }
