@@ -53,10 +53,22 @@ function addButtonColor(selectedButton, selectedColor, selectedIcon) {
 
 function handleActivitySubmit() {
   if (intentionInput.value !== '' && (minutesInput.value !== '' && secondsInput.value !== '')){
-
+    createNewActivity();
+  } else {
+    handleErrorMessages();
   }
 }
 
-function removeDisabled() {
-  console.log("hello");
+function createNewActivity() {
+  var selectedActivity;
+  for (var i=0; i < categoryButton.length; i++) {
+    if (categoryButton[i].children[0].src.includes('study-active')){
+      selectedActivity = 'Study';
+    } else if (categoryButton[i].children[0].src.includes('meditate-active')){
+      selectedActivity = 'Meditate';
+    } else if (categoryButton[i].children[0].src.includes('exercise-active')){
+      selectedActivity = 'Exercise';
+    }
+  }
+  currentActivity = new Activity (selectedActivity, intentionInput.value, minutesInput.value, secondsInput.value)
 }
