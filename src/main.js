@@ -19,15 +19,14 @@ function handleExerciseButton() {
 }
 
 function resetButtonColor(button, color, icon) {
-  categoryButton[0].classList.remove('study-green');
-  categoryButton[0].children[1].classList.remove('study-green');
-  categoryButton[0].children[0].src = './assets/study.svg';
-  categoryButton[1].classList.remove('meditate-purple');
-  categoryButton[1].children[1].classList.remove('meditate-purple');
-  categoryButton[1].children[0].src = './assets/meditate.svg';
-  categoryButton[2].classList.remove('exercise-red');
-  categoryButton[2].children[1].classList.remove('exercise-red');
-  categoryButton[2].children[0].src = './assets/exercise.svg';
+  for (var i=0; i < categoryButton.length; i++) {
+    var defaultImages = ['./assets/study.svg', './assets/meditate.svg', './assets/exercise.svg'];
+    categoryButton[i].className = '';
+    categoryButton[i].classList.add('category-button');
+    categoryButton[i].children[1].className = '';
+    categoryButton[i].children[0].src = defaultImages[i];
+  }
+
   addButtonColor(button, color, icon)
 }
 
