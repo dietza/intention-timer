@@ -61,6 +61,7 @@ function handleActivitySubmit() {
 
 function createNewActivity() {
   var selectedActivity;
+
   for (var i=0; i < categoryButton.length; i++) {
     if (categoryButton[i].children[0].src.includes('study-active')){
       selectedActivity = 'Study';
@@ -75,12 +76,21 @@ function createNewActivity() {
 
 function handleErrorMessages() {
   var intentionError =
-    `<div class='intention-error'>
+    `<div class='error-message'>
       <img src='./assets/warning.svg' class='error-icon'>
       <p>A description is required.</p>
+    </div>`;
+  var timeError =
+    `<div class='error-message'>
+      <img src='./assets/warning.svg' class='error-icon'>
+      <p>A time value is required.</p>
     </div>`;
   if (intentionInput.value === '') {
     intentionInput.insertAdjacentHTML('afterend', intentionError);
     intentionInput.classList.add('error-pink');
+  } else if (minutesInput.value === '' && secondsInput.value === '') {
+    document.querySelector('.time-section').insertAdjacentHTML('afterend', timeError);
+    minutesInput.classList.add('error-pink');
+    secondsInput.classList.add('error-pink');
   }
 }

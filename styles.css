@@ -116,7 +116,7 @@ main {
   flex-direction: row;
   justify-content: space-between;
   margin-top: 70px;
-  margin-bottom: 50px;
+  margin-bottom: 10px;
 }
 
 .minsec {
@@ -150,7 +150,7 @@ main {
   fill: #B3FD78;
 }
 
-.intention-error {
+.error-message {
   display: flex;
   flex-direction: row;
   color: #EFB7EC;
@@ -167,7 +167,7 @@ main {
 .start-activity-button {
   background-color: #FFF;
   color: #46424D;
-  margin-top: 30px;
+  margin-top: 70px;
   margin-bottom: 30px;
   width: 30%;
   padding: 10px;
@@ -175,6 +175,7 @@ main {
   border-radius: 5px;
   border: none;
 }
+
 .study-green {
   border-color: #B3FD78;
   color: #B3FD78;
