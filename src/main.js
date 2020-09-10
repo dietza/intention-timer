@@ -3,6 +3,7 @@ var startActivityButton = document.querySelector('.start-activity-button');
 var intentionInput = document.querySelector('.intention-input');
 var minutesInput = document.querySelector('.minutes-input');
 var secondsInput = document.querySelector('.seconds-input');
+var newActivityCard = document.querySelector('.new-activity-card')
 
 var currentActivity;
 
@@ -52,12 +53,24 @@ function addButtonColor(selectedButton, selectedColor, selectedIcon) {
 }
 
 function handleActivitySubmit() {
+  clearErrors();
   if (intentionInput.value === '') {
-    showIntentionError()
+    showIntentionError();
   } else if (minutesInput.value === '' && secondsInput.value === '') {
     showTimeError();
   } else {
     createNewActivity();
+  }
+}
+
+function clearErrors() {
+  for (var i = 0; i < newActivityCard.children.length; i++) {
+    if (newActivityCard.children[i].className === 'error-message') {
+      newActivityCard.children[i].remove();
+      intentionInput.classList.remove('error-pink');
+      minutesInput.classList.remove('error-pink');
+      secondsInput.classList.remove('error-pink');
+    }
   }
 }
 
@@ -67,7 +80,7 @@ function showIntentionError() {
       <img src='./assets/warning.svg' class='error-icon'>
       <p>A description is required.</p>
     </div>`;
-  intentionInput.insertAdjacentHTML('afterend', intentionError);
+  document.querySelector('.intention-section').insertAdjacentHTML('afterend', intentionError);
   intentionInput.classList.add('error-pink');
 }
 
@@ -77,9 +90,9 @@ function showTimeError() {
       <img src='./assets/warning.svg' class='error-icon'>
       <p>A time value is required.</p>
     </div>`;
-    document.querySelector('.time-section').insertAdjacentHTML('afterend', timeError);
-    minutesInput.classList.add('error-pink');
-    secondsInput.classList.add('error-pink');
+  document.querySelector('.time-section').insertAdjacentHTML('afterend', timeError);
+  minutesInput.classList.add('error-pink');
+  secondsInput.classList.add('error-pink');
 }
 
 function createNewActivity() {
@@ -93,5 +106,6 @@ function createNewActivity() {
       selectedActivity = 'Exercise';
     }
   }
+  // clear inputs
   currentActivity = new Activity (selectedActivity, intentionInput.value, minutesInput.value, secondsInput.value)
 }
