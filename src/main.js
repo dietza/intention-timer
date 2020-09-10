@@ -72,3 +72,15 @@ function createNewActivity() {
   }
   currentActivity = new Activity (selectedActivity, intentionInput.value, minutesInput.value, secondsInput.value)
 }
+
+function handleErrorMessages() {
+  var intentionError =
+    `<div class='intention-error'>
+      <img src='./assets/warning.svg' class='error-icon'>
+      <p>A description is required.</p>
+    </div>`;
+  if (intentionInput.value === '') {
+    intentionInput.insertAdjacentHTML('afterend', intentionError);
+    intentionInput.classList.add('error-pink');
+  }
+}

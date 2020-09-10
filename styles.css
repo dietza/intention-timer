@@ -150,6 +150,20 @@ main {
   fill: #B3FD78;
 }
 
+.intention-error {
+  display: flex;
+  flex-direction: row;
+  color: #EFB7EC;
+  font-size: .75em;
+  padding-top: 10px;;
+}
+
+.error-icon {
+  height: 12px;
+  width: 12px;
+  padding-right: 7px;
+}
+
 .start-activity-button {
   background-color: #FFF;
   color: #46424D;
@@ -169,6 +183,7 @@ main {
 .meditate-purple {
   border-color: #C278FD;
   color: #C278FD;
+
 }
 
 .exercise-red {
@@ -177,7 +192,7 @@ main {
 }
 
 .error-pink {
-  color: #EFB7EC;
+  border-color: #EFB7EC;
 }
 
 .dark-text {
