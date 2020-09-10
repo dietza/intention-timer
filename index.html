@@ -42,11 +42,11 @@
             <div class="time-section">
               <div class="minsec">
                 <h4>Minutes</h4>
-                <input type="text" name="" value="" class="time-input light-grey">
+                <input type='number' min='0' onkeypress='return event.charCode >= 48 && event.charCode <=57' name="" value="" class="time-input light-grey">
               </div>
               <div class="minsec">
                 <h4>Seconds</h4>
-                <input type="text" name="" value="" class="time-input light-grey">
+                <input type='number' min='1' onkeypress='return event.charCode >= 48 && event.charCode <=57' name="" value="" class="time-input light-grey">
               </div>
             </div>
 
