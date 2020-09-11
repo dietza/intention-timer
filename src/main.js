@@ -106,6 +106,12 @@ function createNewActivity() {
       selectedActivity = 'Exercise';
     }
   }
-  // clear inputs
-  currentActivity = new Activity (selectedActivity, intentionInput.value, minutesInput.value, secondsInput.value)
+  currentActivity = new Activity (selectedActivity, intentionInput.value, minutesInput.value, secondsInput.value);
+  clearInputs();
+}
+
+function clearInputs() {
+  intentionInput.value = '';
+  minutesInput.value = '';
+  secondsInput.value = '';
 }
