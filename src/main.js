@@ -4,6 +4,7 @@ var intentionInput = document.querySelector('.intention-input');
 var minutesInput = document.querySelector('.minutes-input');
 var secondsInput = document.querySelector('.seconds-input');
 var newActivityCard = document.querySelector('.new-activity-card');
+var currentActivityCard = document.querySelector('.current-activity-card');
 
 var currentActivity;
 
@@ -107,11 +108,10 @@ function createNewActivity() {
     }
   }
   currentActivity = new Activity (selectedActivity, intentionInput.value, minutesInput.value, secondsInput.value);
-  clearInputs();
+  switchView()
 }
 
-function clearInputs() {
-  intentionInput.value = '';
-  minutesInput.value = '';
-  secondsInput.value = '';
+function switchView() {
+  newActivityCard.classList.add('hidden');
+  currentActivityCard.classList.remove('hidden');
 }
