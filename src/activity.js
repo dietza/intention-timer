@@ -10,7 +10,7 @@ class Activity {
   }
 
   startTimer() {
-
+    console.log('yoyo');
   }
 
   markComplete() {

@@ -14,6 +14,7 @@ categoryButton[0].addEventListener('click', handleStudyButton);
 categoryButton[1].addEventListener('click', handleMeditateButton);
 categoryButton[2].addEventListener('click', handleExerciseButton);
 startActivityButton.addEventListener('click', handleActivitySubmit);
+startTimerButton.addEventListener('click', handleTimer)
 
 function handleStudyButton() {
   resetButtonColor(categoryButton[0], 'study-green', "./assets/study-active.svg");
@@ -59,7 +60,7 @@ function handleActivitySubmit() {
   clearErrors();
   if (intentionInput.value === '') {
     showIntentionError();
-  } else if (minutesInput.value === '' && secondsInput.value === '') {
+  } else if (minutesInput.value === '' || secondsInput.value === '') {
     showTimeError();
   } else {
     createNewActivity();
@@ -91,7 +92,7 @@ function showTimeError() {
   var timeError =
     `<div class='error-message'>
       <img src='./assets/warning.svg' class='error-icon'>
-      <p>A time value is required.</p>
+      <p>A time value in both fields is required.</p>
     </div>`;
   document.querySelector('.time-section').insertAdjacentHTML('afterend', timeError);
   minutesInput.classList.add('error-pink');
@@ -113,7 +114,9 @@ function createNewActivity() {
       selectedColor = '#FD8078';
     }
   }
-  currentActivity = new Activity (selectedActivity, selectedColor, intentionInput.value, minutesInput.value, secondsInput.value);
+  var minutes = (minutesInput.value < 10) ? "0" + minutesInput.value : minutesInput.value;
+  var seconds = (secondsInput.value < 10) ? "0" + secondsInput.value : secondsInput.value;
+  currentActivity = new Activity (selectedActivity, selectedColor, intentionInput.value, minutes, seconds);
   clearInputs();
   setTimer();
   switchView();
@@ -134,4 +137,8 @@ function setTimer() {
 function switchView() {
   newActivityCard.classList.add('hidden');
   currentActivityCard.classList.remove('hidden');
+}
+
+function handleTimer() {
+  currentActivity.startTimer()
 }
