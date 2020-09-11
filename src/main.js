@@ -108,7 +108,14 @@ function createNewActivity() {
     }
   }
   currentActivity = new Activity (selectedActivity, intentionInput.value, minutesInput.value, secondsInput.value);
-  switchView()
+  clearInputs();
+  switchView();
+}
+
+function clearInputs() {
+  intentionInput.value = '';
+  minutesInput.value = '';
+  secondsInput.value = '';
 }
 
 function switchView() {
