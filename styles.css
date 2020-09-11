@@ -66,7 +66,7 @@ main {
   min-width: 35%;
 }
 
-.new-activity-card {
+.current-card {
   display: flex;
   flex-direction: column;
   padding-top: 40px;
@@ -202,4 +202,34 @@ main {
 
 .light-grey {
   background-color: #46424D;
+}
+.hidden{
+  display: none;
+}
+
+.timer-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timer-description {
+  font-size: 1.25em;
+}
+
+.timer-time {
+  font-size: 5em;
+  margin-top: 5px;
+  margin-bottom: 30px;
+}
+
+.start-timer-button {
+  height: 200px;
+  width: 200px;
+  background-color: #46424D;
+  color: #CBC9CF;
+  border-radius: 50%;
+  border: 4px solid;
+  font-size: 1.25em;
+  margin-bottom: 70px;
 }

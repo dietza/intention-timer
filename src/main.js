@@ -3,7 +3,7 @@ var startActivityButton = document.querySelector('.start-activity-button');
 var intentionInput = document.querySelector('.intention-input');
 var minutesInput = document.querySelector('.minutes-input');
 var secondsInput = document.querySelector('.seconds-input');
-var newActivityCard = document.querySelector('.new-activity-card')
+var newActivityCard = document.querySelector('.new-activity-card');
 
 var currentActivity;
 
