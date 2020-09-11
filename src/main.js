@@ -63,7 +63,7 @@ function handleActivitySubmit() {
   } else if (minutesInput.value === '' || secondsInput.value === '') {
     showTimeError();
   } else {
-    createNewActivity();
+    convertCategory();
   }
 }
 
@@ -99,7 +99,7 @@ function showTimeError() {
   secondsInput.classList.add('error-pink');
 }
 
-function createNewActivity() {
+function convertCategory() {
   var selectedActivity;
   var selectedColor;
   for (var i=0; i < categoryButton.length; i++) {
@@ -114,9 +114,18 @@ function createNewActivity() {
       selectedColor = '#FD8078';
     }
   }
+  convertTime(selectedActivity, selectedColor);
+}
+
+function convertTime(selectedActivity, selectedColor) {
   var minutes = (minutesInput.value < 10) ? "0" + minutesInput.value : minutesInput.value;
   var seconds = (secondsInput.value < 10) ? "0" + secondsInput.value : secondsInput.value;
-  currentActivity = new Activity (selectedActivity, selectedColor, intentionInput.value, minutes, seconds);
+  createNewActivity(selectedActivity, selectedColor, intentionInput.value, minutes, seconds);
+}
+
+
+function createNewActivity(activity, color, intention, mins, secs) {
+  currentActivity = new Activity (activity, color, intention, mins, secs);
   clearInputs();
   setTimer();
   switchView();
@@ -130,7 +139,7 @@ function clearInputs() {
 
 function setTimer() {
   document.querySelector('.timer-description').innerText = currentActivity.description;
-  timerTime.innerText = `${currentActivity.minutes} : ${currentActivity.seconds}`;
+  timerTime.innerText = `${currentActivity.minutes}:${currentActivity.seconds}`;
   startTimerButton.style.borderColor = currentActivity.categoryColor.valueOf();
 }
 
