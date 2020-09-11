@@ -14,21 +14,21 @@
 
         <section class="new-activity-section">
           <h3 class="dark-text">New Activity</h3>
-          <article class="light-grey new-activity-card">
+          <article class="light-grey new-activity-card current-card">
             <h4>Select a category:</h4>
               <div class="category-icons">
 
-                <button class="category-button light-grey">
+                <button class="category-button study-button light-grey">
                     <img src="./assets/study.svg" alt="study icon" class="category-image">
                   <h4>Study</h4>
                 </button>
 
-                <button class="category-button light-grey">
+                <button class="category-button meditate-button light-grey">
                     <img src="./assets/meditate.svg" alt="meditate icon" class="category-image">
                   <h4>Meditate</h4>
                 </button>
 
-                <button class="category-button light-grey">
+                <button class="category-button exercise-button light-grey">
                     <img src="./assets/exercise.svg" alt="exercise icon" class="category-image">
                   <h4>Exercise</h4>
                 </button>
@@ -36,21 +36,29 @@
               </div>
             <div class="intention-section">
               <h4>What would you like to accomplish during this time?</h4>
-              <input type="text" name="" value="" class="intention-input light-grey">
+              <input type="text" name="" value="" class="intention-input light-grey" disabled>
             </div>
 
             <div class="time-section">
               <div class="minsec">
                 <h4>Minutes</h4>
-                <input type="text" name="" value="" class="time-input light-grey">
+                <input type='number' min='0' onkeypress='return event.charCode >= 48 && event.charCode <=57' name="" value="" class="time-input minutes-input light-grey" disabled>
               </div>
               <div class="minsec">
                 <h4>Seconds</h4>
-                <input type="text" name="" value="" class="time-input light-grey">
+                <input type='number' min='1' onkeypress='return event.charCode >= 48 && event.charCode <=57' name="" value="" class="time-input seconds-input light-grey" disabled>
               </div>
             </div>
 
             <button type="button" name="button" class="start-activity-button">START ACTIVITY</button>
+          </article>
+
+          <article class="light-grey current-card current-activity-card hidden">
+            <div class="timer-card">
+              <p class="timer-description"></p>
+              <h1 class="timer-time"></h1>
+              <button class="start-timer-button">START</button>
+            </div>
           </article>
         </section>
 
