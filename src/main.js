@@ -149,5 +149,10 @@ function switchView() {
 }
 
 function handleTimer() {
-currentActivity.startTimer();
+  setInterval(updateTime, 1000)
+}
+
+function updateTime() {
+  currentActivity.startTimer();
+  timerTime.innerText = `${currentActivity.minutes}:${currentActivity.seconds}`;
 }
