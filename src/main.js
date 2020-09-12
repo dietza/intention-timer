@@ -118,8 +118,8 @@ function convertCategory() {
 }
 
 function convertTime(selectedActivity, selectedColor) {
-  var minutes = (minutesInput.value < 10) ? "0" + minutesInput.value : minutesInput.value;
-  var seconds = (secondsInput.value < 10) ? "0" + secondsInput.value : secondsInput.value;
+  var minutes = minutesInput.value < 10 ? '0' + minutesInput.value : minutesInput.value;
+  var seconds = secondsInput.value < 10 ? '0' + secondsInput.value : secondsInput.value;
   createNewActivity(selectedActivity, selectedColor, intentionInput.value, minutes, seconds);
 }
 
@@ -149,5 +149,5 @@ function switchView() {
 }
 
 function handleTimer() {
-  currentActivity.startTimer()
+currentActivity.startTimer();
 }

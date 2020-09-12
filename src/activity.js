@@ -10,7 +10,14 @@ class Activity {
   }
 
   startTimer() {
-    console.log('yoyo');
+    var parsedSeconds = parseInt(this.seconds);
+    var counter = 0;
+    function timerFunction() {
+      this.seconds = parsedSeconds;
+      counter++;
+      this.seconds -= counter;
+    }
+    setInterval(timerFunction,1000)
   }
 
   markComplete() {
