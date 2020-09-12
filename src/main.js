@@ -115,15 +115,7 @@ function convertCategory() {
     }
   }
   createNewActivity(selectedActivity, selectedColor, intentionInput.value, minutesInput.value, secondsInput.value);
-  // convertTime(selectedActivity, selectedColor);
 }
-
-// function convertTime(selectedActivity, selectedColor) {
-//   var minutes = minutesInput.value;
-//   var seconds = secondsInput.value;
-//   createNewActivity(selectedActivity, selectedColor, intentionInput.value, minutes, seconds);
-// }
-
 
 function createNewActivity(activity, color, intention, mins, secs) {
   currentActivity = new Activity (activity, color, intention, mins, secs);
@@ -145,14 +137,15 @@ function setTimer() {
 
   timerAlert();
 
-  currentActivity.minutes = (currentActivity.minutes < 10) ? '0' + String(currentActivity.minutes) : String(currentActivity.minutes);
-  currentActivity.seconds = (currentActivity.seconds < 10) ? '0' + String(currentActivity.seconds) : String(currentActivity.seconds)
+  currentActivity.minutes = (currentActivity.minutes < 10) ? '0' + currentActivity.minutes : currentActivity.minutes;
+  currentActivity.seconds = (currentActivity.seconds < 10) ? '0' + currentActivity.seconds : currentActivity.seconds;
+
+  console.log(currentActivity.minutes);
+  console.log(currentActivity.seconds);
 
   timerTime.innerText =
  `${currentActivity.minutes}:${currentActivity.seconds}`;
   startTimerButton.style.borderColor = currentActivity.categoryColor.valueOf();
-
-
 }
 
 function timerAlert() {
