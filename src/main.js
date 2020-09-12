@@ -131,26 +131,24 @@ function clearInputs() {
 }
 
 function setTimer() {
-  document.querySelector('.timer-description').innerText = currentActivity.description;
   currentActivity.minutes = parseInt(currentActivity.minutes);
   currentActivity.seconds = parseInt(currentActivity.seconds);
-
-  timerAlert();
-
-  currentActivity.minutes = (currentActivity.minutes < 10) ? '0' + currentActivity.minutes : currentActivity.minutes;
-  currentActivity.seconds = (currentActivity.seconds < 10) ? '0' + currentActivity.seconds : currentActivity.seconds;
-
-  console.log(currentActivity.minutes);
-  console.log(currentActivity.seconds);
-
-  timerTime.innerText =
- `${currentActivity.minutes}:${currentActivity.seconds}`;
-  startTimerButton.style.borderColor = currentActivity.categoryColor.valueOf();
+  showAlert();
+  displayTimer();
 }
 
-function timerAlert() {
+function displayTimer() {
+  document.querySelector('.timer-description').innerText = currentActivity.description;
+  startTimerButton.style.borderColor = currentActivity.categoryColor.valueOf();
+  currentActivity.minutes = (currentActivity.minutes < 10) ? '0' + currentActivity.minutes : currentActivity.minutes;
+  currentActivity.seconds = (currentActivity.seconds < 10) ? '0' + currentActivity.seconds : currentActivity.seconds;
+  timerTime.innerText =
+ `${currentActivity.minutes}:${currentActivity.seconds}`;
+}
+
+function showAlert() {
   if (currentActivity.seconds === -1) {
-    alert('WORKKKKK');
+    alert('Stop Timer');
   }
 }
 

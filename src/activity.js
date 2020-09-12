@@ -10,7 +10,7 @@ class Activity {
   }
 
   startTimer() {
-    var totalSeconds = (this.minutes * 60) + this.seconds ;
+    var totalSeconds = (this.minutes * 60) + this.seconds;
     var counter = 0;
     counter++;
     totalSeconds -= counter;
