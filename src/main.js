@@ -149,7 +149,7 @@ function switchView() {
 }
 
 function handleTimer() {
-  setInterval(updateTime, 1000)
+  setInterval(updateTime, 1000);
 }
 
 function updateTime() {

@@ -10,9 +10,17 @@ class Activity {
   }
 
   startTimer() {
+    var totalSeconds = (this.minutes * 60) + this.seconds;
     var counter = 0;
     counter++;
-    return this.seconds -= counter;
+    totalSeconds -= counter;
+    this.minutes = Math.floor(totalSeconds / 60);
+    this.seconds = totalSeconds % 60;
+    return `${this.minutes}:${this.seconds}`
+    // 0 in seconds is showing up so we need to fix interval
+    // seconds should be limited to 2 digits per fields
+    // should always have at least 4 digits in the log.
+    // is convertTime working at all? is it because of partseInt on property?
   }
 
   markComplete() {
