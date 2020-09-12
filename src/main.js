@@ -114,14 +114,15 @@ function convertCategory() {
       selectedColor = '#FD8078';
     }
   }
-  convertTime(selectedActivity, selectedColor);
+  createNewActivity(selectedActivity, selectedColor, intentionInput.value, minutesInput.value, secondsInput.value);
+  // convertTime(selectedActivity, selectedColor);
 }
 
-function convertTime(selectedActivity, selectedColor) {
-  var minutes = minutesInput.value < 10 ? '0' + minutesInput.value : minutesInput.value;
-  var seconds = secondsInput.value < 10 ? '0' + secondsInput.value : secondsInput.value;
-  createNewActivity(selectedActivity, selectedColor, intentionInput.value, minutes, seconds);
-}
+// function convertTime(selectedActivity, selectedColor) {
+//   var minutes = minutesInput.value;
+//   var seconds = secondsInput.value;
+//   createNewActivity(selectedActivity, selectedColor, intentionInput.value, minutes, seconds);
+// }
 
 
 function createNewActivity(activity, color, intention, mins, secs) {
@@ -139,8 +140,15 @@ function clearInputs() {
 
 function setTimer() {
   document.querySelector('.timer-description').innerText = currentActivity.description;
-  timerTime.innerText = `${currentActivity.minutes}:${currentActivity.seconds}`;
+  currentActivity.minutes = parseInt(currentActivity.minutes);
+
+  currentActivity.minutes = (currentActivity.minutes < 10) ? '0' + String(currentActivity.minutes) : String(currentActivity.minutes);
+  currentActivity.seconds = (currentActivity.seconds < 10) ? '0' + String(currentActivity.seconds) : String(currentActivity.seconds)
+
+  timerTime.innerText =
+ `${currentActivity.minutes}:${currentActivity.seconds}`;
   startTimerButton.style.borderColor = currentActivity.categoryColor.valueOf();
+  currentActivity.startTimer();
 }
 
 function switchView() {
@@ -149,10 +157,10 @@ function switchView() {
 }
 
 function handleTimer() {
-  setInterval(updateTime, 1000);
+  setInterval(setTimer, 1000);
 }
 
-function updateTime() {
-  currentActivity.startTimer();
-  timerTime.innerText = `${currentActivity.minutes}:${currentActivity.seconds}`;
-}
+// function updateTime() {
+//   currentActivity.startTimer();
+//   timerTime.innerText = `${currentActivity.minutes}:${currentActivity.seconds}`;
+// }
