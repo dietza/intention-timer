@@ -141,6 +141,9 @@ function clearInputs() {
 function setTimer() {
   document.querySelector('.timer-description').innerText = currentActivity.description;
   currentActivity.minutes = parseInt(currentActivity.minutes);
+  currentActivity.seconds = parseInt(currentActivity.seconds);
+
+  timerAlert();
 
   currentActivity.minutes = (currentActivity.minutes < 10) ? '0' + String(currentActivity.minutes) : String(currentActivity.minutes);
   currentActivity.seconds = (currentActivity.seconds < 10) ? '0' + String(currentActivity.seconds) : String(currentActivity.seconds)
@@ -148,7 +151,14 @@ function setTimer() {
   timerTime.innerText =
  `${currentActivity.minutes}:${currentActivity.seconds}`;
   startTimerButton.style.borderColor = currentActivity.categoryColor.valueOf();
-  currentActivity.startTimer();
+
+
+}
+
+function timerAlert() {
+  if (currentActivity.seconds === -1) {
+    alert('WORKKKKK');
+  }
 }
 
 function switchView() {
@@ -157,10 +167,10 @@ function switchView() {
 }
 
 function handleTimer() {
-  setInterval(setTimer, 1000);
+  setInterval(updateTime, 1000);
 }
 
-// function updateTime() {
-//   currentActivity.startTimer();
-//   timerTime.innerText = `${currentActivity.minutes}:${currentActivity.seconds}`;
-// }
+function updateTime() {
+  currentActivity.startTimer();
+  setTimer();
+}
