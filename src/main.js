@@ -137,19 +137,23 @@ function setTimer() {
   displayTimer();
 }
 
+function showAlert() {
+  if (currentActivity.seconds === -1) {
+    alert('Stop The Timer');
+    currentActivity.seconds = 0;
+  }
+}
+
 function displayTimer() {
   document.querySelector('.timer-description').innerText = currentActivity.description;
   startTimerButton.style.borderColor = currentActivity.categoryColor.valueOf();
-  currentActivity.minutes = (currentActivity.minutes < 10) ? '0' + currentActivity.minutes : currentActivity.minutes;
-  currentActivity.seconds = (currentActivity.seconds < 10) ? '0' + currentActivity.seconds : currentActivity.seconds;
-  timerTime.innerText =
- `${currentActivity.minutes}:${currentActivity.seconds}`;
-}
-
-function showAlert() {
-  if (currentActivity.seconds === -1) {
-    alert('Stop Timer');
+  if (currentActivity.minutes < 10) {
+    currentActivity.minutes = '0' + currentActivity.minutes;
   }
+  if (currentActivity.seconds < 10) {
+    currentActivity.seconds = '0' + currentActivity.seconds;
+  }
+  timerTime.innerText = `${currentActivity.minutes}:${currentActivity.seconds}`;
 }
 
 function switchView() {
@@ -158,6 +162,7 @@ function switchView() {
 }
 
 function handleTimer() {
+  startTimerButton.disabled = true;
   setInterval(updateTime, 1000);
 }
 
