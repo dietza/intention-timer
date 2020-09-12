@@ -10,7 +10,15 @@ class Activity {
   }
 
   startTimer() {
-
+    var totalSeconds = (this.minutes * 60) + this.seconds;
+    var counter = 0;
+    counter++;
+    totalSeconds -= counter;
+    this.seconds = totalSeconds % 60;
+    if (this.seconds === 59) {
+      this.minutes--;
+    }
+    return `${this.minutes}:${this.seconds}`;
   }
 
   markComplete() {

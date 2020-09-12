@@ -14,6 +14,7 @@ categoryButton[0].addEventListener('click', handleStudyButton);
 categoryButton[1].addEventListener('click', handleMeditateButton);
 categoryButton[2].addEventListener('click', handleExerciseButton);
 startActivityButton.addEventListener('click', handleActivitySubmit);
+startTimerButton.addEventListener('click', handleTimer)
 
 function handleStudyButton() {
   resetButtonColor(categoryButton[0], 'study-green', "./assets/study-active.svg");
@@ -59,10 +60,10 @@ function handleActivitySubmit() {
   clearErrors();
   if (intentionInput.value === '') {
     showIntentionError();
-  } else if (minutesInput.value === '' && secondsInput.value === '') {
+  } else if (minutesInput.value === '' || secondsInput.value === '') {
     showTimeError();
   } else {
-    createNewActivity();
+    convertCategory();
   }
 }
 
@@ -91,14 +92,14 @@ function showTimeError() {
   var timeError =
     `<div class='error-message'>
       <img src='./assets/warning.svg' class='error-icon'>
-      <p>A time value is required.</p>
+      <p>A time value in both fields is required.</p>
     </div>`;
   document.querySelector('.time-section').insertAdjacentHTML('afterend', timeError);
   minutesInput.classList.add('error-pink');
   secondsInput.classList.add('error-pink');
 }
 
-function createNewActivity() {
+function convertCategory() {
   var selectedActivity;
   var selectedColor;
   for (var i=0; i < categoryButton.length; i++) {
@@ -113,7 +114,11 @@ function createNewActivity() {
       selectedColor = '#FD8078';
     }
   }
-  currentActivity = new Activity (selectedActivity, selectedColor, intentionInput.value, minutesInput.value, secondsInput.value);
+  createNewActivity(selectedActivity, selectedColor, intentionInput.value, minutesInput.value, secondsInput.value);
+}
+
+function createNewActivity(activity, color, intention, mins, secs) {
+  currentActivity = new Activity (activity, color, intention, mins, secs);
   clearInputs();
   setTimer();
   switchView();
@@ -126,12 +131,42 @@ function clearInputs() {
 }
 
 function setTimer() {
+  currentActivity.minutes = parseInt(currentActivity.minutes);
+  currentActivity.seconds = parseInt(currentActivity.seconds);
+  showAlert();
+  displayTimer();
+}
+
+function showAlert() {
+  if (currentActivity.seconds === -1) {
+    alert('Stop The Timer');
+    currentActivity.seconds = 0;
+  }
+}
+
+function displayTimer() {
   document.querySelector('.timer-description').innerText = currentActivity.description;
-  timerTime.innerText = `${currentActivity.minutes} : ${currentActivity.seconds}`;
   startTimerButton.style.borderColor = currentActivity.categoryColor.valueOf();
+  if (currentActivity.minutes < 10) {
+    currentActivity.minutes = '0' + currentActivity.minutes;
+  }
+  if (currentActivity.seconds < 10) {
+    currentActivity.seconds = '0' + currentActivity.seconds;
+  }
+  timerTime.innerText = `${currentActivity.minutes}:${currentActivity.seconds}`;
 }
 
 function switchView() {
   newActivityCard.classList.add('hidden');
   currentActivityCard.classList.remove('hidden');
+}
+
+function handleTimer() {
+  startTimerButton.disabled = true;
+  setInterval(updateTime, 1000);
+}
+
+function updateTime() {
+  currentActivity.startTimer();
+  setTimer();
 }
