@@ -6,8 +6,6 @@ var secondsInput = document.querySelector('.seconds-input');
 var newActivityCard = document.querySelector('.new-activity-card');
 var currentActivityCard = document.querySelector('.current-activity-card');
 var newActivitySection = document.querySelector('.new-activity-section');
-var timerTime = document.querySelector('.timer-time');
-var startTimerButton = document.querySelector('.start-timer-button');
 
 var currentActivity;
 
@@ -15,7 +13,7 @@ categoryButton[0].addEventListener('click', handleStudyButton);
 categoryButton[1].addEventListener('click', handleMeditateButton);
 categoryButton[2].addEventListener('click', handleExerciseButton);
 startActivityButton.addEventListener('click', handleActivitySubmit);
-startTimerButton.addEventListener('click', handleTimer)
+newActivitySection.addEventListener('click', handleTimer)
 
 function handleStudyButton() {
   resetButtonColor(categoryButton[0], 'study-green', "./assets/study-active.svg");
@@ -46,7 +44,6 @@ function resetButtonColor(button, color, icon) {
     categoryButton[i].children[1].className = '';
     categoryButton[i].children[0].src = defaultImages[i];
   }
-
   addButtonColor(button, color, icon)
 }
 
@@ -119,36 +116,23 @@ function convertCategory() {
 
 function createNewActivity(activity, color, intention, mins, secs) {
   currentActivity = new Activity (activity, color, intention, mins, secs);
-  clearInputs();
-  setTimer();
-  switchView();
-}
-
-function clearInputs() {
-  intentionInput.value = '';
-  minutesInput.value = '';
-  secondsInput.value = '';
-}
-
-function setTimer() {
-  currentActivity.minutes = parseInt(currentActivity.minutes);
-  currentActivity.seconds = parseInt(currentActivity.seconds);
   displayTimer();
 }
 
-function displayTimer() {
-  document.querySelector('.timer-description').innerText = currentActivity.description;
-  startTimerButton.style.borderColor = currentActivity.categoryColor.valueOf();
+function alignClock() {
+  currentActivity.minutes = parseInt(currentActivity.minutes);
+  currentActivity.seconds = parseInt(currentActivity.seconds);
   if (currentActivity.minutes < 10) {
     currentActivity.minutes = '0' + currentActivity.minutes;
   }
   if (currentActivity.seconds < 10) {
     currentActivity.seconds = '0' + currentActivity.seconds;
   }
-  timerTime.innerText = `${currentActivity.minutes}:${currentActivity.seconds}`;
 }
 
-function switchView() {
+function displayTimer() {
+  newActivitySection.innerHTML = "";
+  alignClock()
   var timerCard =
   `<article class="light-grey current-card current-activity-card">
     <div class="timer-card">
@@ -157,24 +141,24 @@ function switchView() {
       <button class="start-timer-button ${currentActivity.categoryColor}">START</button>
     </div>
   </article>`
-  newActivityCard.classList.add('hidden');
   newActivitySection.insertAdjacentHTML('beforeend', timerCard);
-  console.log('.start-timer-button');
-
 }
 
-function handleTimer() {
-  startTimerButton.disabled = true;
-  var timer = setInterval(updateTime, 1000);
+function handleTimer(event) {
+  if (event.target.classList.contains("start-timer-button")) {
+    event.target.disabled = true;
+    var timer = setInterval(updateTime, 1000);
+  }
+
 
 function updateTime() {
   currentActivity.startTimer();
-  setTimer();
+  displayTimer();
+  currentActivity.minutes = parseInt(currentActivity.minutes);
   currentActivity.seconds = parseInt(currentActivity.seconds);
-  if (currentActivity.seconds === 0) {
+  if (currentActivity.seconds === 0 && currentActivity.minutes === 0) {
     currentActivity.completed = true;
     clearInterval(timer);
-    console.log(currentActivity.completed);
   }
   }
 }
