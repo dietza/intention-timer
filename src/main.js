@@ -133,15 +133,7 @@ function clearInputs() {
 function setTimer() {
   currentActivity.minutes = parseInt(currentActivity.minutes);
   currentActivity.seconds = parseInt(currentActivity.seconds);
-  showAlert();
   displayTimer();
-}
-
-function showAlert() {
-  if (currentActivity.seconds === -1) {
-    alert('Stop The Timer');
-    currentActivity.seconds = 0;
-  }
 }
 
 function displayTimer() {
@@ -163,10 +155,14 @@ function switchView() {
 
 function handleTimer() {
   startTimerButton.disabled = true;
-  setInterval(updateTime, 1000);
-}
+  var timer = setInterval(updateTime, 1000);
 
 function updateTime() {
   currentActivity.startTimer();
   setTimer();
+  currentActivity.seconds = parseInt(currentActivity.seconds);
+  if (currentActivity.seconds === 0) {
+    clearInterval(timer);
+  }
+  }
 }
