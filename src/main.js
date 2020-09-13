@@ -5,6 +5,7 @@ var minutesInput = document.querySelector('.minutes-input');
 var secondsInput = document.querySelector('.seconds-input');
 var newActivityCard = document.querySelector('.new-activity-card');
 var activityCard = document.querySelector('.activity-card');
+var inputCard = document.querySelector('.input-card');
 var sectionTitle = document.querySelector('.section-title');
 
 var currentActivity;
@@ -132,6 +133,7 @@ function alignClock() {
 
 function displayTimer() {
   activityCard.innerHTML = "";
+  inputCard.classList.add("hidden");
   sectionTitle.innerText = "Current Activity";
   alignClock();
   var timerCard =

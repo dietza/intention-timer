@@ -14,32 +14,27 @@
 
         <section class="new-activity-section">
           <h3 class="dark-text section-title">New Activity</h3>
-          <div class="activity-card">
+          <div class="input-card">
             <article class="light-grey new-activity-card current-card">
               <h4>Select a category:</h4>
                 <div class="category-icons">
-
                   <button class="category-button study-button light-grey">
                       <img src="./assets/study.svg" alt="study icon" class="category-image">
                     <h4>Study</h4>
                   </button>
-
                   <button class="category-button meditate-button light-grey">
                       <img src="./assets/meditate.svg" alt="meditate icon" class="category-image">
                     <h4>Meditate</h4>
                   </button>
-
                   <button class="category-button exercise-button light-grey">
                       <img src="./assets/exercise.svg" alt="exercise icon" class="category-image">
                     <h4>Exercise</h4>
                   </button>
-
                 </div>
               <div class="intention-section">
                 <h4>What would you like to accomplish during this time?</h4>
                 <input type="text" name="" value="" class="intention-input light-grey" disabled>
               </div>
-
               <div class="time-section">
                 <div class="minsec">
                   <h4>Minutes</h4>
@@ -50,9 +45,10 @@
                   <input type='number' min='1' onkeypress='return event.charCode >= 48 && event.charCode <=57' name="" value="" class="time-input seconds-input light-grey" disabled>
                 </div>
               </div>
-
               <button type="button" name="button" class="start-activity-button">START ACTIVITY</button>
             </article>
+          </div>
+          <div class="activity-card">
           </div>
         </section>
         <section class="past-activities-section">
@@ -64,7 +60,6 @@
             </div>
           </article>
         </section>
-
       </main>
     </body>
   <script type="text/javascript" src="./src/activity.js"></script>
