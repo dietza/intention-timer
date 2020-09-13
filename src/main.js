@@ -4,7 +4,6 @@ var intentionInput = document.querySelector('.intention-input');
 var minutesInput = document.querySelector('.minutes-input');
 var secondsInput = document.querySelector('.seconds-input');
 var newActivityCard = document.querySelector('.new-activity-card');
-var currentActivityCard = document.querySelector('.current-activity-card');
 var newActivitySection = document.querySelector('.new-activity-section');
 
 var currentActivity;
@@ -144,21 +143,35 @@ function displayTimer() {
   newActivitySection.insertAdjacentHTML('beforeend', timerCard);
 }
 
+function showFinished() {
+  newActivitySection.innerHTML = "";
+  var finishedCard =
+  `<article class="light-grey current-card current-activity-card">
+    <div class="timer-card">
+      <p class="timer-description">${currentActivity.description}</p>
+      <h1 class="timer-time">00:00</h1>
+      <button class="start-timer-button ${currentActivity.categoryColor}">COMPLETE!</button>
+      <button class="log-activity-button">LOG ACTIVITY</button>
+    </div>
+  </article>`
+  newActivitySection.insertAdjacentHTML('beforeend', finishedCard);
+}
+
 function handleTimer(event) {
   if (event.target.classList.contains("start-timer-button")) {
     event.target.disabled = true;
     var timer = setInterval(updateTime, 1000);
   }
 
-
-function updateTime() {
-  currentActivity.startTimer();
-  displayTimer();
-  currentActivity.minutes = parseInt(currentActivity.minutes);
-  currentActivity.seconds = parseInt(currentActivity.seconds);
-  if (currentActivity.seconds === 0 && currentActivity.minutes === 0) {
-    currentActivity.completed = true;
-    clearInterval(timer);
-  }
+  function updateTime() {
+    currentActivity.startTimer();
+    displayTimer();
+    currentActivity.minutes = parseInt(currentActivity.minutes);
+    currentActivity.seconds = parseInt(currentActivity.seconds);
+    if (currentActivity.seconds === 0 && currentActivity.minutes === 0) {
+      currentActivity.completed = true;
+      clearInterval(timer);
+      showFinished();
+    }
   }
 }

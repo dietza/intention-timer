@@ -235,6 +235,16 @@ main {
   margin-bottom: 70px;
 }
 
+.log-activity-button {
+  background-color: #FFF;
+  color: #46424D;
+  margin-bottom: 30px;
+  width: 30%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
 .study-color {
   border-color: #B3FD78;
 }
