@@ -4,7 +4,7 @@ var intentionInput = document.querySelector('.intention-input');
 var minutesInput = document.querySelector('.minutes-input');
 var secondsInput = document.querySelector('.seconds-input');
 var newActivityCard = document.querySelector('.new-activity-card');
-var activityCard = document.querySelector('.activity-card');
+var timerCard = document.querySelector('.timer-card');
 var inputCard = document.querySelector('.input-card');
 var sectionTitle = document.querySelector('.section-title');
 
@@ -14,7 +14,7 @@ categoryButton[0].addEventListener('click', handleStudyButton);
 categoryButton[1].addEventListener('click', handleMeditateButton);
 categoryButton[2].addEventListener('click', handleExerciseButton);
 startActivityButton.addEventListener('click', handleActivitySubmit);
-activityCard.addEventListener('click', handleTimer)
+timerCard.addEventListener('click', handleTimer)
 
 function handleStudyButton() {
   resetButtonColor(categoryButton[0], 'study-green', "./assets/study-active.svg");
@@ -132,11 +132,11 @@ function alignClock() {
 }
 
 function displayTimer() {
-  activityCard.innerHTML = "";
+  timerCard.innerHTML = "";
   inputCard.classList.add("hidden");
   sectionTitle.innerText = "Current Activity";
   alignClock();
-  var timerCard =
+  var timerContent =
   `<article class="light-grey current-card current-activity-card">
     <div class="timer-card">
       <p class="timer-description">${currentActivity.description}</p>
@@ -144,11 +144,11 @@ function displayTimer() {
       <button class="start-timer-button ${currentActivity.categoryColor}">START</button>
     </div>
   </article>`
-  activityCard.insertAdjacentHTML('beforeend', timerCard);
+  timerCard.insertAdjacentHTML('beforeend', timerContent);
 }
 
 function showFinished() {
-  activityCard.innerHTML = "";
+  timerCard.innerHTML = "";
   var finishedCard =
   `<article class="light-grey current-card current-activity-card">
     <div class="timer-card">
@@ -158,7 +158,7 @@ function showFinished() {
       <button class="log-activity-button">LOG ACTIVITY</button>
     </div>
   </article>`
-  activityCard.insertAdjacentHTML('beforeend', finishedCard);
+  timerCard.insertAdjacentHTML('beforeend', finishedCard);
 }
 
 function handleTimer(event) {
