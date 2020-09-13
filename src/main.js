@@ -4,7 +4,8 @@ var intentionInput = document.querySelector('.intention-input');
 var minutesInput = document.querySelector('.minutes-input');
 var secondsInput = document.querySelector('.seconds-input');
 var newActivityCard = document.querySelector('.new-activity-card');
-var newActivitySection = document.querySelector('.new-activity-section');
+var activityCard = document.querySelector('.activity-card');
+var sectionTitle = document.querySelector('.section-title');
 
 var currentActivity;
 
@@ -12,7 +13,7 @@ categoryButton[0].addEventListener('click', handleStudyButton);
 categoryButton[1].addEventListener('click', handleMeditateButton);
 categoryButton[2].addEventListener('click', handleExerciseButton);
 startActivityButton.addEventListener('click', handleActivitySubmit);
-newActivitySection.addEventListener('click', handleTimer)
+activityCard.addEventListener('click', handleTimer)
 
 function handleStudyButton() {
   resetButtonColor(categoryButton[0], 'study-green', "./assets/study-active.svg");
@@ -130,8 +131,9 @@ function alignClock() {
 }
 
 function displayTimer() {
-  newActivitySection.innerHTML = "";
-  alignClock()
+  activityCard.innerHTML = "";
+  sectionTitle.innerText = "Current Activity";
+  alignClock();
   var timerCard =
   `<article class="light-grey current-card current-activity-card">
     <div class="timer-card">
@@ -140,11 +142,11 @@ function displayTimer() {
       <button class="start-timer-button ${currentActivity.categoryColor}">START</button>
     </div>
   </article>`
-  newActivitySection.insertAdjacentHTML('beforeend', timerCard);
+  activityCard.insertAdjacentHTML('beforeend', timerCard);
 }
 
 function showFinished() {
-  newActivitySection.innerHTML = "";
+  activityCard.innerHTML = "";
   var finishedCard =
   `<article class="light-grey current-card current-activity-card">
     <div class="timer-card">
@@ -154,7 +156,7 @@ function showFinished() {
       <button class="log-activity-button">LOG ACTIVITY</button>
     </div>
   </article>`
-  newActivitySection.insertAdjacentHTML('beforeend', finishedCard);
+  activityCard.insertAdjacentHTML('beforeend', finishedCard);
 }
 
 function handleTimer(event) {
