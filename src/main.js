@@ -5,6 +5,7 @@ var minutesInput = document.querySelector('.minutes-input');
 var secondsInput = document.querySelector('.seconds-input');
 var newActivityCard = document.querySelector('.new-activity-card');
 var currentActivityCard = document.querySelector('.current-activity-card');
+var newActivitySection = document.querySelector('.new-activity-section');
 var timerTime = document.querySelector('.timer-time');
 var startTimerButton = document.querySelector('.start-timer-button');
 
@@ -105,13 +106,13 @@ function convertCategory() {
   for (var i=0; i < categoryButton.length; i++) {
     if (categoryButton[i].children[0].src.includes('study-active')){
       selectedActivity = 'Study';
-      selectedColor = '#B3FD78';
+      selectedColor = 'study-color start-timer-button';
     } else if (categoryButton[i].children[0].src.includes('meditate-active')){
       selectedActivity = 'Meditate';
-      selectedColor = '#C278FD';
+      selectedColor = 'meditate-color start-timer-button';
     } else if (categoryButton[i].children[0].src.includes('exercise-active')){
       selectedActivity = 'Exercise';
-      selectedColor = '#FD8078';
+      selectedColor = 'exercise-color start-timer-button';
     }
   }
   createNewActivity(selectedActivity, selectedColor, intentionInput.value, minutesInput.value, secondsInput.value);
@@ -149,8 +150,18 @@ function displayTimer() {
 }
 
 function switchView() {
+  var timerCard =
+  `<article class="light-grey current-card current-activity-card">
+    <div class="timer-card">
+      <p class="timer-description">${currentActivity.description}</p>
+      <h1 class="timer-time">${currentActivity.minutes}:${currentActivity.seconds}</h1>
+      <button class="start-timer-button">START</button>
+    </div>
+  </article>`
   newActivityCard.classList.add('hidden');
-  currentActivityCard.classList.remove('hidden');
+  newActivitySection.insertAdjacentHTML('beforeend', timerCard);
+  console.log('.start-timer-button');
+  console.log(event.target);
 }
 
 function handleTimer() {
@@ -162,7 +173,9 @@ function updateTime() {
   setTimer();
   currentActivity.seconds = parseInt(currentActivity.seconds);
   if (currentActivity.seconds === 0) {
+    currentActivity.completed = true;
     clearInterval(timer);
+    console.log(currentActivity.completed);
   }
   }
 }

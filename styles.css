@@ -192,6 +192,19 @@ main {
   color: #FD8078;
 }
 
+.study-color {
+  border-color: #B3FD78;
+}
+
+.meditate-color {
+  border-color: #C278FD;
+
+}
+
+.exercise-color {
+  border-color: #FD8078;
+}
+
 .error-pink {
   border-color: #EFB7EC;
 }
