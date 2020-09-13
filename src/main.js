@@ -106,13 +106,12 @@ function convertCategory() {
   for (var i=0; i < categoryButton.length; i++) {
     if (categoryButton[i].children[0].src.includes('study-active')){
       selectedActivity = 'Study';
-      selectedColor = 'study-color start-timer-button';
+      selectedColor = 'study-color';
     } else if (categoryButton[i].children[0].src.includes('meditate-active')){
       selectedActivity = 'Meditate';
-      selectedColor = 'meditate-color start-timer-button';
     } else if (categoryButton[i].children[0].src.includes('exercise-active')){
       selectedActivity = 'Exercise';
-      selectedColor = 'exercise-color start-timer-button';
+      selectedColor = 'exercise-color';
     }
   }
   createNewActivity(selectedActivity, selectedColor, intentionInput.value, minutesInput.value, secondsInput.value);
@@ -155,13 +154,13 @@ function switchView() {
     <div class="timer-card">
       <p class="timer-description">${currentActivity.description}</p>
       <h1 class="timer-time">${currentActivity.minutes}:${currentActivity.seconds}</h1>
-      <button class="start-timer-button">START</button>
+      <button class="start-timer-button ${currentActivity.categoryColor}">START</button>
     </div>
   </article>`
   newActivityCard.classList.add('hidden');
   newActivitySection.insertAdjacentHTML('beforeend', timerCard);
   console.log('.start-timer-button');
-  console.log(event.target);
+
 }
 
 function handleTimer() {
