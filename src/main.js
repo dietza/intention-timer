@@ -4,7 +4,7 @@ var intentionInput = document.querySelector('.intention-input');
 var minutesInput = document.querySelector('.minutes-input');
 var secondsInput = document.querySelector('.seconds-input');
 var newActivityCard = document.querySelector('.new-activity-card');
-var timerCard = document.querySelector('.timer-card');
+var timerCard = document.querySelector('.inserted-card');
 var inputCard = document.querySelector('.input-card');
 var sectionTitle = document.querySelector('.section-title');
 
@@ -14,7 +14,7 @@ categoryButton[0].addEventListener('click', handleStudyButton);
 categoryButton[1].addEventListener('click', handleMeditateButton);
 categoryButton[2].addEventListener('click', handleExerciseButton);
 startActivityButton.addEventListener('click', handleActivitySubmit);
-timerCard.addEventListener('click', handleTimer)
+timerCard.addEventListener('click', delegateCardResponsibility);
 
 function handleStudyButton() {
   resetButtonColor(categoryButton[0], 'study-green', "./assets/study-active.svg");
@@ -107,6 +107,7 @@ function convertCategory() {
       selectedColor = 'study-color';
     } else if (categoryButton[i].children[0].src.includes('meditate-active')){
       selectedActivity = 'Meditate';
+      selectedColor = 'meditate-color';
     } else if (categoryButton[i].children[0].src.includes('exercise-active')){
       selectedActivity = 'Exercise';
       selectedColor = 'exercise-color';
@@ -137,7 +138,7 @@ function displayTimer() {
   sectionTitle.innerText = "Current Activity";
   alignClock();
   var timerContent =
-  `<article class="light-grey second-card current-activity-card">
+  `<article class="light-grey first-card current-activity-card">
     <div class="timer-card">
       <p class="timer-description">${currentActivity.description}</p>
       <h1 class="timer-time">${currentActivity.minutes}:${currentActivity.seconds}</h1>
@@ -150,7 +151,7 @@ function displayTimer() {
 function showFinished() {
   timerCard.innerHTML = "";
   var finishedCard =
-  `<article class="light-grey second-card current-activity-card">
+  `<article class="light-grey first-card current-activity-card">
     <div class="timer-card">
       <p class="timer-description">${currentActivity.description}</p>
       <h1 class="timer-time">00:00</h1>
@@ -161,11 +162,19 @@ function showFinished() {
   timerCard.insertAdjacentHTML('beforeend', finishedCard);
 }
 
-function handleTimer(event) {
-  if (event.target.classList.contains("start-timer-button")) {
+function delegateCardResponsibility(event) {
+  if (event.target.classList.contains('start-timer-button')){
+    handleTimer(event);
     event.target.disabled = true;
-    var timer = setInterval(updateTime, 1000);
+  } else if (event.target.classList.contains('log-activity-button')){
+    logActivity();
+  } else if (event.target.classList.contains('create-new-activity-button')){
+    returnToMain();
   }
+}
+
+function handleTimer(event) {
+  var timer = setInterval(updateTime, 1000);
 
   function updateTime() {
     currentActivity.startTimer();
@@ -178,4 +187,20 @@ function handleTimer(event) {
       showFinished();
     }
   }
+}
+
+function logActivity() {
+  timerCard.innerHTML = "";
+  var logActivity =
+  `<article class="light-grey first-card current-activity-card">
+    <div class="timer-card">
+      <button class="create-new-activity-button">CREATE A NEW ACTIVITY</button>
+    </div>
+  </article>`
+  timerCard.insertAdjacentHTML('beforeend', logActivity);
+}
+
+function returnToMain() {
+  timerCard.innerHTML = "";
+  inputCard.classList.remove("hidden");
 }
