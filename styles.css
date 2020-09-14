@@ -35,7 +35,7 @@ h3 {
   padding: 20px 20px 0px 20px;
 }
 
-h2, h3, h4, p {
+h2, h3, h4, h5, p {
   margin: 0;
 }
 
@@ -55,6 +55,8 @@ main {
 
 .past-activities-section {
   min-width: 35%;
+  display: flex;
+  flex-direction: column;
 }
 
 .first-card {
@@ -269,15 +271,43 @@ main {
   border: none;
 }
 
+.past-activity-border {
+  height: 20px;
+  border: 2px solid;
+  border-color:#B3FD78;
+  border-radius: 30%;
+  position: absolute;
+  right: 40px;
+}
+
+.past-activity-category {
+  font-size: .80em;
+  font-weight: bolder;
+}
+
+.past-activity-description {
+  font-size: .75em;
+  padding-top: 5px;
+}
+
 .study-color {
   border-color: #B3FD78;
 }
 
 .meditate-color {
   border-color: #C278FD;
-
 }
 
 .exercise-color {
   border-color: #FD8078;
+}
+
+.past-activity-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-radius: 10px;
 }

@@ -38,7 +38,7 @@ function enableInputs() {
 }
 
 function resetButtonColor(button, color, icon) {
-  for (var i=0; i < categoryButton.length; i++) {
+  for (var i = 0; i < categoryButton.length; i++) {
     var defaultImages = ['./assets/study.svg', './assets/meditate.svg', './assets/exercise.svg'];
     categoryButton[i].className = '';
     categoryButton[i].classList.add('category-button');
@@ -201,9 +201,14 @@ function logActivity() {
 }
 
 function returnToMain() {
-  timerCard.innerHTML = "";
-  intentionInput.innerText = "";
-  minutesInput.innerText = "";
-  secondsInput.innerText = "";
+  clearInputs();
+
   inputCard.classList.remove("hidden");
+}
+
+function clearInputs() {
+  timerCard.value = "";
+  intentionInput.value = "";
+  minutesInput.value = "";
+  secondsInput.value = "";
 }
