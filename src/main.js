@@ -202,5 +202,8 @@ function logActivity() {
 
 function returnToMain() {
   timerCard.innerHTML = "";
+  intentionInput.innerText = "";
+  minutesInput.innerText = "";
+  secondsInput.innerText = "";
   inputCard.classList.remove("hidden");
 }
