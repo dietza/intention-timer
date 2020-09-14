@@ -124,13 +124,13 @@ function createNewActivity(activity, color, intention, mins, secs) {
 }
 
 function alignClock() {
-  currentActivity.minutes = parseInt(currentActivity.minutes);
-  currentActivity.seconds = parseInt(currentActivity.seconds);
-  if (currentActivity.minutes < 10) {
-    currentActivity.minutes = '0' + currentActivity.minutes;
+  currentActivity.countdownMinutes = parseInt(currentActivity.countdownMinutes);
+  currentActivity.countdownSeconds = parseInt(currentActivity.countdownSeconds);
+  if (currentActivity.countdownMinutes < 10) {
+    currentActivity.countdownMinutes = '0' + currentActivity.countdownMinutes;
   }
-  if (currentActivity.seconds < 10) {
-    currentActivity.seconds = '0' + currentActivity.seconds;
+  if (currentActivity.countdownSeconds < 10) {
+    currentActivity.countdownSeconds = '0' + currentActivity.countdownSeconds;
   }
 }
 
@@ -143,7 +143,7 @@ function displayTimer() {
   `<article class="light-grey first-card current-activity-card">
     <div class="timer-card">
       <p class="timer-description">${currentActivity.description}</p>
-      <h1 class="timer-time">${currentActivity.minutes}:${currentActivity.seconds}</h1>
+      <h1 class="timer-time">${currentActivity.countdownMinutes}:${currentActivity.countdownSeconds}</h1>
       <button class="start-timer-button ${currentActivity.categoryColor}">START</button>
     </div>
   </article>`
@@ -181,12 +181,12 @@ function handleTimer(event) {
   function updateTime() {
     currentActivity.startTimer();
     displayTimer();
-    currentActivity.minutes = parseInt(currentActivity.minutes);
-    currentActivity.seconds = parseInt(currentActivity.seconds);
-    if (currentActivity.seconds === 0 && currentActivity.minutes === 0) {
+    currentActivity.countdownMinutes = parseInt(currentActivity.countdownMinutes);
+    currentActivity.countdownSeconds = parseInt(currentActivity.countdownSeconds);
+    if (currentActivity.countdownSeconds === 0 && currentActivity.countdownMinutes === 0) {
       clearInterval(timer);
-      currentActivity.markComplete();
       showFinished();
+      currentActivity.markComplete();
     }
   }
 }

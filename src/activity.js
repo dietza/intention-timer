@@ -5,29 +5,31 @@ class Activity {
     this.description = description;
     this.minutes = minutes;
     this.seconds = seconds;
+    this.countdownMinutes = minutes;
+    this.countdownSeconds = seconds;
     this.completed = false;
     this.id = Date.now();
   }
 
   startTimer() {
-    var totalSeconds = (this.minutes * 60) + this.seconds;
+    var totalSeconds = (this.countdownMinutes * 60) + this.countdownSeconds;
     var counter = 0;
     counter++;
     totalSeconds -= counter;
-    this.seconds = totalSeconds % 60;
-    if (this.seconds === 59) {
-      this.minutes--;
+    this.countdownSeconds = totalSeconds % 60;
+    if (this.countdownSeconds === 59) {
+      this.countdownMinutes--;
     }
-    return `${this.minutes}:${this.seconds}`;
+    return `${this.countdownMinutes}:${this.countdownSeconds}`;
   }
 
   markComplete() {
-    if (this.seconds === 0) {
-      this.seconds = seconds;
-    }
-    if (this.miutes === 0) {
-      this.minutes = minutes;
-    }
+    // if (this.seconds === 0) {
+    //   this.seconds = seconds;
+    // }
+    // if (this.minutes === 0) {
+    //   this.minutes = minutes;
+    // }
     this.completed = true;
   }
 
