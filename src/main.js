@@ -7,8 +7,10 @@ var newActivityCard = document.querySelector('.new-activity-card');
 var timerCard = document.querySelector('.inserted-card');
 var inputCard = document.querySelector('.input-card');
 var sectionTitle = document.querySelector('.section-title');
+var activityLog = document.querySelector('.activity-log');
 
 var currentActivity;
+var pastActivities = [];
 
 categoryButton[0].addEventListener('click', handleStudyButton);
 categoryButton[1].addEventListener('click', handleMeditateButton);
@@ -167,7 +169,7 @@ function delegateCardResponsibility(event) {
     handleTimer(event);
     event.target.disabled = true;
   } else if (event.target.classList.contains('log-activity-button')){
-    logActivity();
+    updatePastActivities();
   } else if (event.target.classList.contains('create-new-activity-button')){
     returnToMain();
   }
@@ -182,11 +184,16 @@ function handleTimer(event) {
     currentActivity.minutes = parseInt(currentActivity.minutes);
     currentActivity.seconds = parseInt(currentActivity.seconds);
     if (currentActivity.seconds === 0 && currentActivity.minutes === 0) {
-      currentActivity.completed = true;
       clearInterval(timer);
+      currentActivity.markComplete();
       showFinished();
     }
   }
+}
+
+function updatePastActivities() {
+  pastActivities.push(currentActivity);
+  logActivity();
 }
 
 function logActivity() {
@@ -198,11 +205,26 @@ function logActivity() {
     </div>
   </article>`
   timerCard.insertAdjacentHTML('beforeend', logActivity);
-}
+  displayActivityCard();
+ }
+
+ function displayActivityCard() {
+   activityLog.innerHTML = "";
+   for (var i = 0; i < pastActivities.length; i++) {
+     var activityCard =
+     `<div class="past-activity-card light-grey">
+       <div class="past-activity-border ${pastActivities[i].categoryColor}"></div>
+       <h4 class="past-activity-category">${pastActivities[i].categoryName}</h4>
+       <h5 class="past-activity-time">${pastActivities[i].minutes} MINS ${pastActivities[i].seconds} SECONDS</h5>
+       <p class="past-activity-description">${pastActivities[i].description}</p>
+     </div>`
+    activityLog.insertAdjacentHTML('afterbegin', activityCard);
+   }
+ }
 
 function returnToMain() {
   clearInputs();
-
+  timerCard.innerHTML = "";
   inputCard.classList.remove("hidden");
 }
 

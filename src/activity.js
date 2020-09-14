@@ -22,7 +22,13 @@ class Activity {
   }
 
   markComplete() {
-
+    if (this.seconds === 0) {
+      this.seconds = seconds;
+    }
+    if (this.miutes === 0) {
+      this.minutes = minutes;
+    }
+    this.completed = true;
   }
 
   saveToStorage() {
