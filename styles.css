@@ -57,7 +57,7 @@ main {
   min-width: 35%;
 }
 
-.current-card {
+.first-card {
   display: flex;
   flex-direction: column;
   padding-top: 40px;
@@ -67,6 +67,19 @@ main {
   margin: 10px 20px 20px 20px;
   border-radius: 5px;
   box-shadow: 8px 8px 6px -6px black;
+  }
+
+  .second-card {
+    display: flex;
+    flex-direction: column;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 100px;
+    padding-right: 100px;
+    margin: 10px 20px 20px 20px;
+    border-radius: 5px;
+    box-shadow: 8px 8px 6px -6px black;
+    width: 75%;
   }
 
   .no-activity-message {

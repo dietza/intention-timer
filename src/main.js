@@ -137,7 +137,7 @@ function displayTimer() {
   sectionTitle.innerText = "Current Activity";
   alignClock();
   var timerContent =
-  `<article class="light-grey current-card current-activity-card">
+  `<article class="light-grey second-card current-activity-card">
     <div class="timer-card">
       <p class="timer-description">${currentActivity.description}</p>
       <h1 class="timer-time">${currentActivity.minutes}:${currentActivity.seconds}</h1>
@@ -150,7 +150,7 @@ function displayTimer() {
 function showFinished() {
   timerCard.innerHTML = "";
   var finishedCard =
-  `<article class="light-grey current-card current-activity-card">
+  `<article class="light-grey second-card current-activity-card">
     <div class="timer-card">
       <p class="timer-description">${currentActivity.description}</p>
       <h1 class="timer-time">00:00</h1>
