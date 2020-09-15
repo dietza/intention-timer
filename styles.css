@@ -68,27 +68,14 @@ main {
   box-shadow: 8px 8px 6px -6px #26222D;
   }
 
-  .second-card {
-    display: flex;
-    flex-direction: column;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    padding-left: 100px;
-    padding-right: 100px;
-    margin: 10px 20px 20px 20px;
-    border-radius: 5px;
-    box-shadow: 8px 8px 6px -6px #26222D;
-    width: 75%;
-  }
-
-  .no-activity-message {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: .95em;
-    margin: 30px 30px 30px 0px;
-    width: 100%;
-  }
+.no-activity-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: .95em;
+  margin: 30px 30px 30px 0px;
+  width: 100%;
+}
 
 .intention-input {
   border-color: #CBC9CF;
@@ -207,7 +194,6 @@ main {
 .meditate-purple {
   border-color: #C278FD;
   color: #C278FD;
-
 }
 
 .exercise-red {
@@ -225,9 +211,6 @@ main {
 
 .light-grey {
   background-color: #46424D;
-}
-.hidden{
-  display: none;
 }
 
 .timer-card {
@@ -274,7 +257,7 @@ main {
   border-bottom: none;
   border-top: none;
   border-left: none;
-  border-color: #B3FD78;
+  border-color: black;
   border-radius: 10px;
   position: absolute;
   right: 35px;
@@ -324,4 +307,8 @@ main {
   margin-left: 20px;
   margin-top: 40px;
   width: 92%;
+}
+
+.hidden {
+  display: none;
 }
