@@ -124,11 +124,11 @@ function convertCategory() {
 
 function createNewActivity(activity, color, intention, mins, secs) {
   currentActivity = new Activity (activity, color, intention, mins, secs);
-  displayTimer();
+  displayOriginalTimer();
+  //invokes function of display before the clock runs or button is clicked
 }
 
-function displayTimer() {
-  timerCard.innerHTML = '';
+function displayOriginalTimer() {
   inputCard.classList.add('hidden');
   mainTitle.innerText = 'Current Activity';
   alignTimerClock();
@@ -195,7 +195,7 @@ function setTimer() {
 
   function updateTimeRemaining() {
     currentActivity.startTimer();
-    displayTimer();
+    displayActiveTimer();
     currentActivity.countdownMinutes = parseInt(currentActivity.countdownMinutes);
     currentActivity.countdownSeconds = parseInt(currentActivity.countdownSeconds);
     if (currentActivity.countdownSeconds === 0 && currentActivity.countdownMinutes === 0) {
@@ -204,6 +204,20 @@ function setTimer() {
       currentActivity.markComplete();
     }
   }
+}
+
+function displayActiveTimer() {
+  timerCard.innerHTML = '';
+  alignTimerClock();
+  var timerContent =
+  `<article class='light-grey first-card current-activity-card'>
+    <div class='timer-card'>
+      <p class='timer-description'>${currentActivity.description}</p>
+      <h1 class='timer-time'>${currentActivity.countdownMinutes}:${currentActivity.countdownSeconds}</h1>
+      <button class='start-timer-button ${currentActivity.categoryColor}' disabled>START</button>
+    </div>
+  </article>`
+  timerCard.insertAdjacentHTML('beforeend', timerContent);
 }
 
 function updatePastActivities() {
