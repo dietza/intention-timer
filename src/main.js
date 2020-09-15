@@ -1,11 +1,9 @@
 var categoryButton = document.querySelectorAll('.category-button');
 var startActivityButton = document.querySelector('.start-activity-button');
-var intentionInput = document.querySelector('.intention-input');
-var minutesInput = document.querySelector('.minutes-input');
-var secondsInput = document.querySelector('.seconds-input');
 var newActivityCard = document.querySelector('.new-activity-card');
 var timerCard = document.querySelector('.inserted-card');
 var inputCard = document.querySelector('.input-card');
+var userInputs = document.querySelectorAll('.user-inputs');
 var sectionTitle = document.querySelector('.section-title');
 var activityLog = document.querySelector('.activity-log');
 
@@ -38,9 +36,9 @@ function handleExerciseButton() {
 }
 
 function enableInputs() {
-  intentionInput.disabled = false;
-  minutesInput.disabled = false;
-  secondsInput.disabled = false;
+  userInputs[0].disabled = false;
+  userInputs[1].disabled = false;
+  userInputs[2].disabled = false;
 }
 
 function resetButtonColor() {
@@ -61,9 +59,9 @@ function addButtonColor(selectedButton, selectedColor, selectedIcon) {
 
 function validateSubmission() {
   clearErrors();
-  if (intentionInput.value === '') {
+  if (userInputs[0].value === '') {
     showIntentionError();
-  } else if (minutesInput.value === '' || secondsInput.value === '') {
+  } else if (userInputs[1].value === '' || userInputs[2].value === '') {
     showTimeError();
   } else {
     convertCategory();
@@ -74,9 +72,9 @@ function clearErrors() {
   for (var i = 0; i < newActivityCard.children.length; i++) {
     if (newActivityCard.children[i].className === 'error-message') {
       newActivityCard.children[i].remove();
-      intentionInput.classList.remove('error-pink');
-      minutesInput.classList.remove('error-pink');
-      secondsInput.classList.remove('error-pink');
+      userInputs[0].classList.remove('error-pink');
+      userInputs[1].classList.remove('error-pink');
+      userInputs[2].classList.remove('error-pink');
     }
   }
 }
@@ -88,7 +86,7 @@ function showIntentionError() {
       <p>A description is required.</p>
     </div>`;
   document.querySelector('.intention-section').insertAdjacentHTML('afterend', intentionError);
-  intentionInput.classList.add('error-pink');
+  userInputs[0].classList.add('error-pink');
 }
 
 function showTimeError() {
@@ -98,8 +96,8 @@ function showTimeError() {
       <p>A time value in both fields is required.</p>
     </div>`;
   document.querySelector('.time-section').insertAdjacentHTML('afterend', timeError);
-  minutesInput.classList.add('error-pink');
-  secondsInput.classList.add('error-pink');
+  userInputs[1].classList.add('error-pink');
+  userInputs[2].classList.add('error-pink');
 }
 
 function convertCategory() {
@@ -117,7 +115,7 @@ function convertCategory() {
       selectedColor = 'exercise-color';
     }
   }
-  createNewActivity(selectedActivity, selectedColor, intentionInput.value, minutesInput.value, secondsInput.value);
+  createNewActivity(selectedActivity, selectedColor, userInputs[0].value, userInputs[1].value, userInputs[2].value);
 }
 
 function createNewActivity(activity, color, intention, mins, secs) {
@@ -235,15 +233,15 @@ function returnToMain() {
 
 function clearInputs() {
   timerCard.value = '';
-  intentionInput.value = '';
-  minutesInput.value = '';
-  secondsInput.value = '';
+  userInputs[0].value = '';
+  userInputs[1].value = '';
+  userInputs[2].value = '';
 }
 
 function disableInputs() {
-  intentionInput.disabled = true;
-  minutesInput.disabled = true;
-  secondsInput.disabled = true;
+  userInputs[0].disabled = true;
+  userInputs[1].disabled = true;
+  userInputs[2].disabled = true;
 }
 
 function retrieveFromStorage() {
