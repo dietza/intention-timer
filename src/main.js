@@ -1,11 +1,9 @@
-var categoryButton = document.querySelectorAll('.category-button');
-var startActivityButton = document.querySelector('.start-activity-button');
-var newActivityCard = document.querySelector('.new-activity-card');
-var timerCard = document.querySelector('.inserted-card');
 var inputCard = document.querySelector('.input-card');
+var categoryButton = document.querySelectorAll('.category-button');
 var userInputs = document.querySelectorAll('.user-inputs');
-var sectionTitle = document.querySelector('.section-title');
-var activityLog = document.querySelector('.activity-log');
+var startActivityButton = document.querySelector('.start-activity-button');
+var timerCard = document.querySelector('.inserted-card');
+var mainTitle = document.querySelector('.main-title');
 
 var currentActivity;
 var pastActivities = [];
@@ -69,6 +67,7 @@ function validateSubmission() {
 }
 
 function clearErrors() {
+  var newActivityCard = document.querySelector('.new-activity-card');
   for (var i = 0; i < newActivityCard.children.length; i++) {
     if (newActivityCard.children[i].className === 'error-message') {
       newActivityCard.children[i].remove();
@@ -126,7 +125,7 @@ function createNewActivity(activity, color, intention, mins, secs) {
 function displayTimer() {
   timerCard.innerHTML = '';
   inputCard.classList.add('hidden');
-  sectionTitle.innerText = 'Current Activity';
+  mainTitle.innerText = 'Current Activity';
   alignTimerClock();
   var timerContent =
   `<article class='light-grey first-card current-activity-card'>
@@ -210,6 +209,7 @@ function displayCreateNew() {
  }
 
  function displayPastActivities() {
+   var activityLog = document.querySelector('.activity-log');
    activityLog.innerHTML = '';
    for (var i = 0; i < pastActivities.length; i++) {
      var activityCard =
@@ -224,6 +224,7 @@ function displayCreateNew() {
  }
 
 function returnToMain() {
+  mainTitle.innerText = "New Activity";
   clearInputs();
   resetButtonColor();
   disableInputs();
