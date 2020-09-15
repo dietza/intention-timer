@@ -22,19 +22,19 @@ window.addEventListener('load', retrieveFromStorage);
 
 function handleStudyButton() {
   resetButtonColor();
-  addButtonColor(categoryButton[0], 'study-green', './assets/study-active.svg')
+  addButtonColor(categoryButton[0], 'study-green', './assets/study-active.svg');
   enableInputs();
 }
 
 function handleMeditateButton() {
   resetButtonColor();
-  addButtonColor(categoryButton[1], 'meditate-purple', './assets/meditate-active.svg')
+  addButtonColor(categoryButton[1], 'meditate-purple', './assets/meditate-active.svg');
   enableInputs();
 }
 
 function handleExerciseButton() {
   resetButtonColor();
-  addButtonColor(categoryButton[2], 'exercise-red', './assets/exercise-active.svg')
+  addButtonColor(categoryButton[2], 'exercise-red', './assets/exercise-active.svg');
   enableInputs();
 }
 
@@ -125,7 +125,6 @@ function convertCategory() {
 function createNewActivity(activity, color, intention, mins, secs) {
   currentActivity = new Activity (activity, color, intention, mins, secs);
   displayOriginalTimer();
-  //invokes function of display before the clock runs or button is clicked
 }
 
 function displayOriginalTimer() {
@@ -139,7 +138,7 @@ function displayOriginalTimer() {
       <h1 class='timer-time'>${currentActivity.countdownMinutes}:${currentActivity.countdownSeconds}</h1>
       <button class='start-timer-button ${currentActivity.categoryColor}'>START</button>
     </div>
-  </article>`
+  </article>`;
   timerCard.insertAdjacentHTML('beforeend', timerContent);
 }
 
@@ -164,7 +163,7 @@ function displayFinishedTimer() {
       <button class='start-timer-button ${currentActivity.categoryColor}'>COMPLETE!</button>
       <button class='log-activity-button'>LOG ACTIVITY</button>
     </div>
-  </article>`
+  </article>`;
   timerCard.insertAdjacentHTML('beforeend', finishedCard);
 }
 
@@ -216,7 +215,7 @@ function displayActiveTimer() {
       <h1 class='timer-time'>${currentActivity.countdownMinutes}:${currentActivity.countdownSeconds}</h1>
       <button class='start-timer-button ${currentActivity.categoryColor}' disabled>START</button>
     </div>
-  </article>`
+  </article>`;
   timerCard.insertAdjacentHTML('beforeend', timerContent);
 }
 
@@ -233,7 +232,7 @@ function displayCreateNew() {
     <div class='timer-card'>
       <button class='create-new-activity-button'>CREATE A NEW ACTIVITY</button>
     </div>
-  </article>`
+  </article>`;
   timerCard.insertAdjacentHTML('beforeend', createNewButton);
   displayPastActivities();
  }
@@ -247,11 +246,11 @@ function displayCreateNew() {
        <h4 class='past-activity-category'>${pastActivities[i].categoryName}</h4>
        <h5 class='past-activity-time'>${pastActivities[i].minutes} MINS ${pastActivities[i].seconds} SECONDS</h5>
        <p class='past-activity-description'>${pastActivities[i].description}</p>
-      </div>`
+      </div>`;
     activityLog.insertAdjacentHTML('afterbegin', activityCard);
    }
    var removeButton =
-   `<button class="remove-activities-button">REMOVE ACTIVITIES</button>`
+   `<button class="remove-activities-button">REMOVE ACTIVITIES</button>`;
    activityLog.insertAdjacentHTML('beforeend', removeButton);
  }
 
