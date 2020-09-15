@@ -194,6 +194,7 @@ function handleTimer(event) {
 
 function updatePastActivities() {
   pastActivities.push(currentActivity);
+  currentActivity.saveToStorage();
   logActivity();
 }
 
