@@ -4,6 +4,10 @@ var userInputs = document.querySelectorAll('.user-inputs');
 var startActivityButton = document.querySelector('.start-activity-button');
 var timerCard = document.querySelector('.inserted-card');
 var mainTitle = document.querySelector('.main-title');
+var removeActivitiesButton = document.querySelector('.remove-activities-button');
+var pastActivitiesSection = document.querySelector('.past-activities-section');
+var activityLog = document.querySelector('.activity-log');
+
 
 var currentActivity;
 var pastActivities = [];
@@ -13,6 +17,7 @@ categoryButton[1].addEventListener('click', handleMeditateButton);
 categoryButton[2].addEventListener('click', handleExerciseButton);
 startActivityButton.addEventListener('click', validateSubmission);
 timerCard.addEventListener('click', handleTimerCard);
+pastActivitiesSection.addEventListener('click', deletePastActivities);
 window.addEventListener('load', retrieveFromStorage);
 
 function handleStudyButton() {
@@ -174,6 +179,17 @@ function handleTimerCard(event) {
   }
 }
 
+function deletePastActivities(event) {
+  if (event.target.classList.contains('remove-activities-button')){
+    event.target.remove();
+    localStorage.clear();
+    activityLog.innerHTML = "";
+    var noActivityMessage =
+    `<div class="no-activity-message"><p>You haven't logged any activities yet.</p><p>Complete the form to the left to get started!</p></div>`;
+    activityLog.insertAdjacentHTML('afterbegin', noActivityMessage);
+  }
+}
+
 function setTimer() {
   var timer = setInterval(updateTimeRemaining, 1000);
 
@@ -209,7 +225,6 @@ function displayCreateNew() {
  }
 
  function displayPastActivities() {
-   var activityLog = document.querySelector('.activity-log');
    activityLog.innerHTML = '';
    for (var i = 0; i < pastActivities.length; i++) {
      var activityCard =
@@ -218,9 +233,12 @@ function displayCreateNew() {
        <h4 class='past-activity-category'>${pastActivities[i].categoryName}</h4>
        <h5 class='past-activity-time'>${pastActivities[i].minutes} MINS ${pastActivities[i].seconds} SECONDS</h5>
        <p class='past-activity-description'>${pastActivities[i].description}</p>
-     </div>`
+      </div>`
     activityLog.insertAdjacentHTML('afterbegin', activityCard);
    }
+   var removeButton =
+   `<button class="remove-activities-button">REMOVE ACTIVITIES</button>`
+   activityLog.insertAdjacentHTML('beforeend', removeButton);
  }
 
 function returnToMain() {
