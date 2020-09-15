@@ -131,7 +131,7 @@ function displayOriginalTimer() {
   mainTitle.innerText = 'Current Activity';
   alignTimerClock();
   var timerContent =
-  `<article class='light-grey first-card current-activity-card'>
+  `<article class='light-grey form current-activity-card'>
     <div class='timer-card'>
       <p class='timer-description'>${currentActivity.description}</p>
       <h1 class='timer-time'>${currentActivity.countdownMinutes}:${currentActivity.countdownSeconds}</h1>
@@ -155,7 +155,7 @@ function alignTimerClock() {
 function displayFinishedTimer() {
   timerCard.innerHTML = '';
   var finishedCard =
-  `<article class='light-grey first-card current-activity-card'>
+  `<article class='light-grey form current-activity-card'>
     <div class='timer-card'>
       <p class='timer-description'>${currentActivity.description}</p>
       <h1 class='timer-time'>00:00</h1>
@@ -208,7 +208,7 @@ function displayActiveTimer() {
   timerCard.innerHTML = '';
   alignTimerClock();
   var timerContent =
-  `<article class='light-grey first-card current-activity-card'>
+  `<article class='light-grey form current-activity-card'>
     <div class='timer-card'>
       <p class='timer-description'>${currentActivity.description}</p>
       <h1 class='timer-time'>${currentActivity.countdownMinutes}:${currentActivity.countdownSeconds}</h1>
@@ -227,7 +227,7 @@ function updatePastActivities() {
 function displayCreateNew() {
   timerCard.innerHTML = '';
   var createNewButton =
-  `<article class='light-grey first-card current-activity-card'>
+  `<article class='light-grey form current-activity-card'>
     <div class='timer-card'>
       <button class='create-new-activity-button'>CREATE A NEW ACTIVITY</button>
     </div>
