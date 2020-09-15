@@ -8,8 +8,7 @@ body {
 nav {
   display: flex;
   justify-content: center;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 10px 0;
 }
 
 input {
@@ -59,10 +58,7 @@ main {
 .form {
   display: flex;
   flex-direction: column;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  padding-left: 80px;
-  padding-right: 80px;
+  padding: 40px 80px;
   margin: 13px 20px 20px 20px;
   border-radius: 5px;
   box-shadow: 8px 8px 6px -6px #26222D;
@@ -99,15 +95,13 @@ main {
   border-left: none;
   outline: none;
   width: 100%;
-
 }
 
 .time-section {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 70px;
-  margin-bottom: 10px;
+  margin: 70px 0 10px 0;
 }
 
 .time-block {
@@ -118,8 +112,7 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding: 15px 0;
 }
 
 .category-button {
@@ -130,8 +123,7 @@ main {
   border-radius: 5px;
   height: 50px;
   width: 100px;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin: 15px 0;
   width: 20%;
 }
 
@@ -146,7 +138,7 @@ main {
   flex-direction: row;
   color: #EFB7EC;
   font-size: .75em;
-  padding-top: 10px;;
+  padding-top: 10px;
 }
 
 .error-icon {
@@ -158,8 +150,7 @@ main {
 .start-activity-button {
   background-color: #FFF;
   color: #46424D;
-  margin-top: 70px;
-  margin-bottom: 30px;
+  margin: 70px 0 30px 0;
   width: 30%;
   padding: 10px;
   align-self: flex-end;
@@ -225,8 +216,7 @@ main {
 
 .timer-time {
   font-size: 5em;
-  margin-top: 5px;
-  margin-bottom: 30px;
+  margin: 5px 0 30px 0;
 }
 
 .start-timer-button {
@@ -257,7 +247,7 @@ main {
   border-bottom: none;
   border-top: none;
   border-left: none;
-  border-color: black;
+  border-color: #CBC9CF;
   border-radius: 10px;
   position: absolute;
   right: 35px;
@@ -273,8 +263,7 @@ main {
 
 .past-activity-description {
   font-size: .85em;
-  padding-top: 10px;
-  margin-bottom: 7px;
+  padding: 10px 0 7px 0;
 }
 
 .study-color {
@@ -304,9 +293,10 @@ main {
   padding: 10px;
   border-radius: 5px;
   font-size: 12px;
-  margin-left: 20px;
+  margin-left: 4%;
   margin-top: 40px;
   width: 92%;
+  border: none;
 }
 
 .hidden {
