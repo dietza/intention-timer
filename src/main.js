@@ -1,13 +1,12 @@
-var categoryButton = document.querySelectorAll('.category-button');
-var startActivityButton = document.querySelector('.start-activity-button');
-var intentionInput = document.querySelector('.intention-input');
-var minutesInput = document.querySelector('.minutes-input');
-var secondsInput = document.querySelector('.seconds-input');
-var newActivityCard = document.querySelector('.new-activity-card');
-var timerCard = document.querySelector('.inserted-card');
 var inputCard = document.querySelector('.input-card');
-var sectionTitle = document.querySelector('.section-title');
+var categoryButton = document.querySelectorAll('.category-button');
+var userInputs = document.querySelectorAll('.user-inputs');
+var startActivityButton = document.querySelector('.start-activity-button');
+var timerCard = document.querySelector('.inserted-card');
+var mainTitle = document.querySelector('.main-title');
+var pastActivitiesSection = document.querySelector('.past-activities-section');
 var activityLog = document.querySelector('.activity-log');
+
 
 var currentActivity;
 var pastActivities = [];
@@ -15,32 +14,33 @@ var pastActivities = [];
 categoryButton[0].addEventListener('click', handleStudyButton);
 categoryButton[1].addEventListener('click', handleMeditateButton);
 categoryButton[2].addEventListener('click', handleExerciseButton);
-startActivityButton.addEventListener('click', handleActivitySubmit);
-timerCard.addEventListener('click', delegateCardResponsibility);
+startActivityButton.addEventListener('click', validateSubmission);
+timerCard.addEventListener('click', handleTimerCard);
+pastActivitiesSection.addEventListener('click', deletePastActivities);
 window.addEventListener('load', retrieveFromStorage);
 
 function handleStudyButton() {
   resetButtonColor();
-  addButtonColor(categoryButton[0], 'study-green', "./assets/study-active.svg")
+  addButtonColor(categoryButton[0], 'study-green', './assets/study-active.svg');
   enableInputs();
 }
 
 function handleMeditateButton() {
   resetButtonColor();
-  addButtonColor(categoryButton[1], 'meditate-purple', "./assets/meditate-active.svg")
+  addButtonColor(categoryButton[1], 'meditate-purple', './assets/meditate-active.svg');
   enableInputs();
 }
 
 function handleExerciseButton() {
   resetButtonColor();
-  addButtonColor(categoryButton[2], 'exercise-red', "./assets/exercise-active.svg")
+  addButtonColor(categoryButton[2], 'exercise-red', './assets/exercise-active.svg');
   enableInputs();
 }
 
 function enableInputs() {
-  intentionInput.disabled = false;
-  minutesInput.disabled = false;
-  secondsInput.disabled = false;
+  userInputs[0].disabled = false;
+  userInputs[1].disabled = false;
+  userInputs[2].disabled = false;
 }
 
 function resetButtonColor() {
@@ -59,11 +59,11 @@ function addButtonColor(selectedButton, selectedColor, selectedIcon) {
   selectedButton.children[0].src = selectedIcon;
 }
 
-function handleActivitySubmit() {
+function validateSubmission() {
   clearErrors();
-  if (intentionInput.value === '') {
+  if (userInputs[0].value === '') {
     showIntentionError();
-  } else if (minutesInput.value === '' || secondsInput.value === '') {
+  } else if (userInputs[1].value === '' || userInputs[2].value === '') {
     showTimeError();
   } else {
     convertCategory();
@@ -71,12 +71,13 @@ function handleActivitySubmit() {
 }
 
 function clearErrors() {
+  var newActivityCard = document.querySelector('.new-activity-card');
   for (var i = 0; i < newActivityCard.children.length; i++) {
     if (newActivityCard.children[i].className === 'error-message') {
       newActivityCard.children[i].remove();
-      intentionInput.classList.remove('error-pink');
-      minutesInput.classList.remove('error-pink');
-      secondsInput.classList.remove('error-pink');
+      userInputs[0].classList.remove('error-pink');
+      userInputs[1].classList.remove('error-pink');
+      userInputs[2].classList.remove('error-pink');
     }
   }
 }
@@ -88,7 +89,7 @@ function showIntentionError() {
       <p>A description is required.</p>
     </div>`;
   document.querySelector('.intention-section').insertAdjacentHTML('afterend', intentionError);
-  intentionInput.classList.add('error-pink');
+  userInputs[0].classList.add('error-pink');
 }
 
 function showTimeError() {
@@ -98,8 +99,8 @@ function showTimeError() {
       <p>A time value in both fields is required.</p>
     </div>`;
   document.querySelector('.time-section').insertAdjacentHTML('afterend', timeError);
-  minutesInput.classList.add('error-pink');
-  secondsInput.classList.add('error-pink');
+  userInputs[1].classList.add('error-pink');
+  userInputs[2].classList.add('error-pink');
 }
 
 function convertCategory() {
@@ -117,15 +118,30 @@ function convertCategory() {
       selectedColor = 'exercise-color';
     }
   }
-  createNewActivity(selectedActivity, selectedColor, intentionInput.value, minutesInput.value, secondsInput.value);
+  createNewActivity(selectedActivity, selectedColor, userInputs[0].value, userInputs[1].value, userInputs[2].value);
 }
 
 function createNewActivity(activity, color, intention, mins, secs) {
   currentActivity = new Activity (activity, color, intention, mins, secs);
-  displayTimer();
+  displayOriginalTimer();
 }
 
-function alignClock() {
+function displayOriginalTimer() {
+  inputCard.classList.add('hidden');
+  mainTitle.innerText = 'Current Activity';
+  alignTimerClock();
+  var timerContent =
+  `<article class='light-grey first-card current-activity-card'>
+    <div class='timer-card'>
+      <p class='timer-description'>${currentActivity.description}</p>
+      <h1 class='timer-time'>${currentActivity.countdownMinutes}:${currentActivity.countdownSeconds}</h1>
+      <button class='start-timer-button ${currentActivity.categoryColor}'>START</button>
+    </div>
+  </article>`;
+  timerCard.insertAdjacentHTML('beforeend', timerContent);
+}
+
+function alignTimerClock() {
   currentActivity.countdownMinutes = parseInt(currentActivity.countdownMinutes);
   currentActivity.countdownSeconds = parseInt(currentActivity.countdownSeconds);
   if (currentActivity.countdownMinutes < 10) {
@@ -136,39 +152,23 @@ function alignClock() {
   }
 }
 
-function displayTimer() {
-  timerCard.innerHTML = "";
-  inputCard.classList.add("hidden");
-  sectionTitle.innerText = "Current Activity";
-  alignClock();
-  var timerContent =
-  `<article class="light-grey first-card current-activity-card">
-    <div class="timer-card">
-      <p class="timer-description">${currentActivity.description}</p>
-      <h1 class="timer-time">${currentActivity.countdownMinutes}:${currentActivity.countdownSeconds}</h1>
-      <button class="start-timer-button ${currentActivity.categoryColor}">START</button>
-    </div>
-  </article>`
-  timerCard.insertAdjacentHTML('beforeend', timerContent);
-}
-
-function showFinished() {
-  timerCard.innerHTML = "";
+function displayFinishedTimer() {
+  timerCard.innerHTML = '';
   var finishedCard =
-  `<article class="light-grey first-card current-activity-card">
-    <div class="timer-card">
-      <p class="timer-description">${currentActivity.description}</p>
-      <h1 class="timer-time">00:00</h1>
-      <button class="start-timer-button ${currentActivity.categoryColor}">COMPLETE!</button>
-      <button class="log-activity-button">LOG ACTIVITY</button>
+  `<article class='light-grey first-card current-activity-card'>
+    <div class='timer-card'>
+      <p class='timer-description'>${currentActivity.description}</p>
+      <h1 class='timer-time'>00:00</h1>
+      <button class='start-timer-button ${currentActivity.categoryColor}'>COMPLETE!</button>
+      <button class='log-activity-button'>LOG ACTIVITY</button>
     </div>
-  </article>`
+  </article>`;
   timerCard.insertAdjacentHTML('beforeend', finishedCard);
 }
 
-function delegateCardResponsibility(event) {
+function handleTimerCard(event) {
   if (event.target.classList.contains('start-timer-button')){
-    handleTimer(event);
+    setTimer();
     event.target.disabled = true;
   } else if (event.target.classList.contains('log-activity-button')){
     updatePastActivities();
@@ -177,73 +177,102 @@ function delegateCardResponsibility(event) {
   }
 }
 
-function handleTimer(event) {
-  var timer = setInterval(updateTime, 1000);
+function deletePastActivities(event) {
+  if (event.target.classList.contains('remove-activities-button')){
+    event.target.remove();
+    localStorage.clear();
+    activityLog.innerHTML = "";
+    var noActivityMessage =
+    `<div class="no-activity-message"><p>You haven't logged any activities yet.</p><p>Complete the form to the left to get started!</p></div>`;
+    activityLog.insertAdjacentHTML('afterbegin', noActivityMessage);
+  }
+}
 
-  function updateTime() {
+function setTimer() {
+  var timer = setInterval(updateTimeRemaining, 1000);
+
+  function updateTimeRemaining() {
     currentActivity.startTimer();
-    displayTimer();
+    displayActiveTimer();
     currentActivity.countdownMinutes = parseInt(currentActivity.countdownMinutes);
     currentActivity.countdownSeconds = parseInt(currentActivity.countdownSeconds);
     if (currentActivity.countdownSeconds === 0 && currentActivity.countdownMinutes === 0) {
       clearInterval(timer);
-      showFinished();
+      displayFinishedTimer();
       currentActivity.markComplete();
     }
   }
 }
 
+function displayActiveTimer() {
+  timerCard.innerHTML = '';
+  alignTimerClock();
+  var timerContent =
+  `<article class='light-grey first-card current-activity-card'>
+    <div class='timer-card'>
+      <p class='timer-description'>${currentActivity.description}</p>
+      <h1 class='timer-time'>${currentActivity.countdownMinutes}:${currentActivity.countdownSeconds}</h1>
+      <button class='start-timer-button ${currentActivity.categoryColor}' disabled>START</button>
+    </div>
+  </article>`;
+  timerCard.insertAdjacentHTML('beforeend', timerContent);
+}
+
 function updatePastActivities() {
   pastActivities.push(currentActivity);
   currentActivity.saveToStorage();
-  logActivity();
+  displayCreateNew();
 }
 
-function logActivity() {
-  timerCard.innerHTML = "";
-  var logActivity =
-  `<article class="light-grey first-card current-activity-card">
-    <div class="timer-card">
-      <button class="create-new-activity-button">CREATE A NEW ACTIVITY</button>
+function displayCreateNew() {
+  timerCard.innerHTML = '';
+  var createNewButton =
+  `<article class='light-grey first-card current-activity-card'>
+    <div class='timer-card'>
+      <button class='create-new-activity-button'>CREATE A NEW ACTIVITY</button>
     </div>
-  </article>`
-  timerCard.insertAdjacentHTML('beforeend', logActivity);
-  displayActivityCard();
+  </article>`;
+  timerCard.insertAdjacentHTML('beforeend', createNewButton);
+  displayPastActivities();
  }
 
- function displayActivityCard() {
-   activityLog.innerHTML = "";
+ function displayPastActivities() {
+   activityLog.innerHTML = '';
    for (var i = 0; i < pastActivities.length; i++) {
      var activityCard =
-     `<div class="past-activity-card light-grey">
-       <div class="past-activity-border ${pastActivities[i].categoryColor}"></div>
-       <h4 class="past-activity-category">${pastActivities[i].categoryName}</h4>
-       <h5 class="past-activity-time">${pastActivities[i].minutes} MINS ${pastActivities[i].seconds} SECONDS</h5>
-       <p class="past-activity-description">${pastActivities[i].description}</p>
-     </div>`
+     `<div class='past-activity-card light-grey'>
+       <div class='past-activity-border ${pastActivities[i].categoryColor}'></div>
+       <h4 class='past-activity-category'>${pastActivities[i].categoryName}</h4>
+       <h5 class='past-activity-time'>${pastActivities[i].minutes} MINS ${pastActivities[i].seconds} SECONDS</h5>
+       <p class='past-activity-description'>${pastActivities[i].description}</p>
+      </div>`;
     activityLog.insertAdjacentHTML('afterbegin', activityCard);
    }
+   var removeButton =
+   `<button class="remove-activities-button">REMOVE ACTIVITIES</button>`;
+   activityLog.insertAdjacentHTML('beforeend', removeButton);
  }
 
 function returnToMain() {
+  mainTitle.innerText = "New Activity";
   clearInputs();
-  timerCard.innerHTML = "";
-  inputCard.classList.remove("hidden");
   resetButtonColor();
   disableInputs();
+  timerCard.innerHTML = '';
+  inputCard.classList.remove('hidden');
 }
 
 function clearInputs() {
-  timerCard.value = "";
-  intentionInput.value = "";
-  minutesInput.value = "";
-  secondsInput.value = "";
+  timerCard.value = '';
+  userInputs[0].value = '';
+  userInputs[1].value = '';
+  userInputs[2].value = '';
 }
 
 function disableInputs() {
-  intentionInput.disabled = true;
-  minutesInput.disabled = true;
-  secondsInput.disabled = true;
+  userInputs[0].disabled = true;
+  userInputs[1].disabled = true;
+  userInputs[2].disabled = true;
 }
 
 function retrieveFromStorage() {
@@ -251,6 +280,6 @@ function retrieveFromStorage() {
   var parsedActivities = JSON.parse(storedActivities);
   if (parsedActivities) {
     pastActivities = pastActivities.concat(parsedActivities);
-    displayActivityCard();
+    displayPastActivities();
   }
 }

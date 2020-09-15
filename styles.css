@@ -1,17 +1,8 @@
-/* Main background: #2B2733
-Text on main background: #CBC9CF
-Header, cards: #46424D
-Card shadow: #26222D
-Text on header and cards: #FFF
-
-/* html {
-  height: 100%;
-} */
-
 body {
   font-family: 'Montserrat', sans-serif;
   color: #FFF;
   margin: 0;
+
 }
 
 nav {
@@ -55,13 +46,14 @@ main {
 
 .new-activity-section {
   width: 100%;
-  border-right: solid #46424D 2px;
+  margin-bottom: 100%;
 }
 
 .past-activities-section {
   min-width: 35%;
   display: flex;
   flex-direction: column;
+  border-left: solid #46424D 2px;
 }
 
 .first-card {
@@ -71,7 +63,7 @@ main {
   padding-bottom: 40px;
   padding-left: 80px;
   padding-right: 80px;
-  margin: 10px 20px 20px 20px;
+  margin: 13px 20px 20px 20px;
   border-radius: 5px;
   box-shadow: 8px 8px 6px -6px #26222D;
   }
@@ -317,9 +309,19 @@ main {
 .past-activity-card {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   padding: 10px;
-  margin: 10px 20px;
+  margin: 7px 20px;
   border-radius: 10px;
   box-shadow: 8px 8px 6px -6px #26222D;
+}
+
+.remove-activities-button {
+  background-color: #FFF;
+  color: #46424D;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  margin-left: 20px;
+  margin-top: 40px;
+  width: 92%;
 }

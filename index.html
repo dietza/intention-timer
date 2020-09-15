@@ -13,7 +13,7 @@
       <main class="dark-grey">
 
         <section class="new-activity-section">
-          <h3 class="dark-text section-title">New Activity</h3>
+          <h3 class="dark-text main-title">New Activity</h3>
           <div class="input-card">
             <article class="light-grey new-activity-card first-card">
               <h4>Select a category:</h4>
@@ -33,16 +33,16 @@
                 </div>
               <div class="intention-section">
                 <h4>What would you like to accomplish during this time?</h4>
-                <input type="text" name="" value="" class="intention-input light-grey" disabled>
+                <input type="text" name="" value="" class="intention-input light-grey user-inputs" disabled>
               </div>
               <div class="time-section">
                 <div class="minsec">
                   <h4>Minutes</h4>
-                  <input type='number' min='0' onkeypress='return event.charCode >= 48 && event.charCode <=57' name="" value="" class="time-input minutes-input light-grey" disabled>
+                  <input type='number' min='0' onkeypress='return event.charCode >= 48 && event.charCode <=57' name="" value="" class="time-input light-grey user-inputs" disabled>
                 </div>
                 <div class="minsec">
                   <h4>Seconds</h4>
-                  <input type='number' min='1' onkeypress='return event.charCode >= 48 && event.charCode <=57' name="" value="" class="time-input seconds-input light-grey" disabled>
+                  <input type='number' min='1' onkeypress='return event.charCode >= 48 && event.charCode <=57' name="" value="" class="time-input light-grey user-inputs" disabled>
                 </div>
               </div>
               <button type="button" name="button" class="start-activity-button">START ACTIVITY</button>
@@ -51,7 +51,9 @@
           <div class="inserted-card"></div>
         </section>
         <section class="past-activities-section">
-          <h3 class="dark-text">Past Activities</h3>
+            <h3 class="dark-text">Past Activities</h3>
+            <div class="past-activities">
+            </div>
           <article class="activity-log dark-text">
             <div class="no-activity-message">
               <p>You haven't logged any activities yet.</p>
