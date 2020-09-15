@@ -15,8 +15,8 @@ var pastActivities = [];
 categoryButton[0].addEventListener('click', handleStudyButton);
 categoryButton[1].addEventListener('click', handleMeditateButton);
 categoryButton[2].addEventListener('click', handleExerciseButton);
-startActivityButton.addEventListener('click', handleActivitySubmit);
-timerCard.addEventListener('click', delegateCardResponsibility);
+startActivityButton.addEventListener('click', validateSubmission);
+timerCard.addEventListener('click', handleTimerCard);
 window.addEventListener('load', retrieveFromStorage);
 
 function handleStudyButton() {
@@ -59,7 +59,7 @@ function addButtonColor(selectedButton, selectedColor, selectedIcon) {
   selectedButton.children[0].src = selectedIcon;
 }
 
-function handleActivitySubmit() {
+function validateSubmission() {
   clearErrors();
   if (intentionInput.value === '') {
     showIntentionError();
@@ -125,22 +125,11 @@ function createNewActivity(activity, color, intention, mins, secs) {
   displayTimer();
 }
 
-function alignClock() {
-  currentActivity.countdownMinutes = parseInt(currentActivity.countdownMinutes);
-  currentActivity.countdownSeconds = parseInt(currentActivity.countdownSeconds);
-  if (currentActivity.countdownMinutes < 10) {
-    currentActivity.countdownMinutes = '0' + currentActivity.countdownMinutes;
-  }
-  if (currentActivity.countdownSeconds < 10) {
-    currentActivity.countdownSeconds = '0' + currentActivity.countdownSeconds;
-  }
-}
-
 function displayTimer() {
   timerCard.innerHTML = '';
   inputCard.classList.add('hidden');
   sectionTitle.innerText = 'Current Activity';
-  alignClock();
+  alignTimerClock();
   var timerContent =
   `<article class='light-grey first-card current-activity-card'>
     <div class='timer-card'>
@@ -152,7 +141,18 @@ function displayTimer() {
   timerCard.insertAdjacentHTML('beforeend', timerContent);
 }
 
-function showFinished() {
+function alignTimerClock() {
+  currentActivity.countdownMinutes = parseInt(currentActivity.countdownMinutes);
+  currentActivity.countdownSeconds = parseInt(currentActivity.countdownSeconds);
+  if (currentActivity.countdownMinutes < 10) {
+    currentActivity.countdownMinutes = '0' + currentActivity.countdownMinutes;
+  }
+  if (currentActivity.countdownSeconds < 10) {
+    currentActivity.countdownSeconds = '0' + currentActivity.countdownSeconds;
+  }
+}
+
+function displayFinishedTimer() {
   timerCard.innerHTML = '';
   var finishedCard =
   `<article class='light-grey first-card current-activity-card'>
@@ -166,9 +166,9 @@ function showFinished() {
   timerCard.insertAdjacentHTML('beforeend', finishedCard);
 }
 
-function delegateCardResponsibility(event) {
+function handleTimerCard(event) {
   if (event.target.classList.contains('start-timer-button')){
-    handleTimer(event);
+    setTimer();
     event.target.disabled = true;
   } else if (event.target.classList.contains('log-activity-button')){
     updatePastActivities();
@@ -177,17 +177,17 @@ function delegateCardResponsibility(event) {
   }
 }
 
-function handleTimer(event) {
-  var timer = setInterval(updateTime, 1000);
+function setTimer() {
+  var timer = setInterval(updateTimeRemaining, 1000);
 
-  function updateTime() {
+  function updateTimeRemaining() {
     currentActivity.startTimer();
     displayTimer();
     currentActivity.countdownMinutes = parseInt(currentActivity.countdownMinutes);
     currentActivity.countdownSeconds = parseInt(currentActivity.countdownSeconds);
     if (currentActivity.countdownSeconds === 0 && currentActivity.countdownMinutes === 0) {
       clearInterval(timer);
-      showFinished();
+      displayFinishedTimer();
       currentActivity.markComplete();
     }
   }
@@ -196,22 +196,22 @@ function handleTimer(event) {
 function updatePastActivities() {
   pastActivities.push(currentActivity);
   currentActivity.saveToStorage();
-  logActivity();
+  displayCreateNew();
 }
 
-function logActivity() {
+function displayCreateNew() {
   timerCard.innerHTML = '';
-  var logActivity =
+  var createNewButton =
   `<article class='light-grey first-card current-activity-card'>
     <div class='timer-card'>
       <button class='create-new-activity-button'>CREATE A NEW ACTIVITY</button>
     </div>
   </article>`
-  timerCard.insertAdjacentHTML('beforeend', logActivity);
-  displayActivityCard();
+  timerCard.insertAdjacentHTML('beforeend', createNewButton);
+  displayPastActivities();
  }
 
- function displayActivityCard() {
+ function displayPastActivities() {
    activityLog.innerHTML = '';
    for (var i = 0; i < pastActivities.length; i++) {
      var activityCard =
@@ -227,10 +227,10 @@ function logActivity() {
 
 function returnToMain() {
   clearInputs();
-  timerCard.innerHTML = '';
-  inputCard.classList.remove('hidden');
   resetButtonColor();
   disableInputs();
+  timerCard.innerHTML = '';
+  inputCard.classList.remove('hidden');
 }
 
 function clearInputs() {
@@ -251,6 +251,6 @@ function retrieveFromStorage() {
   var parsedActivities = JSON.parse(storedActivities);
   if (parsedActivities) {
     pastActivities = pastActivities.concat(parsedActivities);
-    displayActivityCard();
+    displayPastActivities();
   }
 }
