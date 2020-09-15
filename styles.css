@@ -35,7 +35,12 @@ h3 {
   padding: 20px 20px 0px 20px;
 }
 
-h2, h3, h4, h5, p {
+h2, h3, h4, h5 {
+  margin: 0;
+  font-weight: normal;
+}
+
+p {
   margin: 0;
 }
 
@@ -88,8 +93,8 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size: .95em;
     margin: 30px 30px 30px 0px;
-    font-size: 12px;
     width: 100%;
   }
 
@@ -284,8 +289,7 @@ main {
 }
 
 .past-activity-category {
-  font-size: .80em;
-  font-weight: 400;
+  font-weight: 600;
 }
 
 .past-activity-time {
@@ -293,8 +297,9 @@ main {
 }
 
 .past-activity-description {
-  font-size: .75em;
-  padding-top: 5px;
+  font-size: .85em;
+  padding-top: 10px;
+  margin-bottom: 7px;
 }
 
 .study-color {
