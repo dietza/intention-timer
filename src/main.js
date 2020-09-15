@@ -19,17 +19,20 @@ startActivityButton.addEventListener('click', handleActivitySubmit);
 timerCard.addEventListener('click', delegateCardResponsibility);
 
 function handleStudyButton() {
-  resetButtonColor(categoryButton[0], 'study-green', "./assets/study-active.svg");
+  resetButtonColor();
+  addButtonColor(categoryButton[0], 'study-green', "./assets/study-active.svg")
   enableInputs();
 }
 
 function handleMeditateButton() {
-  resetButtonColor(categoryButton[1], 'meditate-purple', "./assets/meditate-active.svg");
+  resetButtonColor();
+  addButtonColor(categoryButton[1], 'meditate-purple', "./assets/meditate-active.svg")
   enableInputs();
 }
 
 function handleExerciseButton() {
-  resetButtonColor(categoryButton[2], 'exercise-red', "./assets/exercise-active.svg");
+  resetButtonColor();
+  addButtonColor(categoryButton[2], 'exercise-red', "./assets/exercise-active.svg")
   enableInputs();
 }
 
@@ -39,7 +42,7 @@ function enableInputs() {
   secondsInput.disabled = false;
 }
 
-function resetButtonColor(button, color, icon) {
+function resetButtonColor() {
   for (var i = 0; i < categoryButton.length; i++) {
     var defaultImages = ['./assets/study.svg', './assets/meditate.svg', './assets/exercise.svg'];
     categoryButton[i].className = '';
@@ -47,9 +50,7 @@ function resetButtonColor(button, color, icon) {
     categoryButton[i].children[1].className = '';
     categoryButton[i].children[0].src = defaultImages[i];
   }
-  addButtonColor(button, color, icon)
 }
-
 
 function addButtonColor(selectedButton, selectedColor, selectedIcon) {
   selectedButton.classList.add(selectedColor);
@@ -226,6 +227,8 @@ function returnToMain() {
   clearInputs();
   timerCard.innerHTML = "";
   inputCard.classList.remove("hidden");
+  resetButtonColor();
+  disableInputs();
 }
 
 function clearInputs() {
@@ -233,4 +236,10 @@ function clearInputs() {
   intentionInput.value = "";
   minutesInput.value = "";
   secondsInput.value = "";
+}
+
+function disableInputs() {
+  intentionInput.disabled = true;
+  minutesInput.disabled = true;
+  secondsInput.disabled = true;
 }
