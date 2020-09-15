@@ -4,7 +4,6 @@ var userInputs = document.querySelectorAll('.user-inputs');
 var startActivityButton = document.querySelector('.start-activity-button');
 var timerCard = document.querySelector('.inserted-card');
 var mainTitle = document.querySelector('.main-title');
-var removeActivitiesButton = document.querySelector('.remove-activities-button');
 var pastActivitiesSection = document.querySelector('.past-activities-section');
 var activityLog = document.querySelector('.activity-log');
 
