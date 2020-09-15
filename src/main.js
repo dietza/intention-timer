@@ -17,6 +17,7 @@ categoryButton[1].addEventListener('click', handleMeditateButton);
 categoryButton[2].addEventListener('click', handleExerciseButton);
 startActivityButton.addEventListener('click', handleActivitySubmit);
 timerCard.addEventListener('click', delegateCardResponsibility);
+window.addEventListener('load', retrieveFromStorage);
 
 function handleStudyButton() {
   resetButtonColor();
@@ -194,6 +195,7 @@ function handleTimer(event) {
 
 function updatePastActivities() {
   pastActivities.push(currentActivity);
+  currentActivity.saveToStorage();
   logActivity();
 }
 
@@ -242,4 +244,13 @@ function disableInputs() {
   intentionInput.disabled = true;
   minutesInput.disabled = true;
   secondsInput.disabled = true;
+}
+
+function retrieveFromStorage() {
+  var storedActivities = localStorage.getItem('storedActivities');
+  var parsedActivities = JSON.parse(storedActivities);
+  if (parsedActivities) {
+    pastActivities = pastActivities.concat(parsedActivities);
+    displayActivityCard();
+  }
 }
