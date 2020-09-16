@@ -208,6 +208,7 @@ function deletePastActivities(event) {
   if (event.target.classList.contains('remove-activities-button')){
     event.target.remove();
     localStorage.clear();
+    pastActivities = [];
     activityLog.innerHTML = '';
     var noActivityMessage =
     `<div class="no-activity-message"><p>You haven't logged any activities yet.</p><p>Complete the form to the left to get started!</p></div>`;
