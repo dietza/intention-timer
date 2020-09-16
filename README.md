@@ -2,7 +2,7 @@
 
 ## Project Description
 
-- Link the rubric and project brief.
+- [Link the rubric and project brief](https://frontend.turing.io/projects/module-1/intention-timer-group.html)
 - Explain at a high level what the web app does
 
 - [How to access this project](https://github.com/dietza/intention-timer)
@@ -11,7 +11,8 @@
 ## Functionality
 
 - Dissect each iteration's functionality
-- One Gif of the entire functionality.
+
+![gif of website functionality](https://media.giphy.com/media/3esbWhwSqI0hBvCcc1/giphy.gif)
 
 ## Programming Languages Used
 
@@ -23,7 +24,8 @@
 
 ## Learning Goals
 
-- Building an entire web app from scratch using the three primary Frontend languages
+- Building an entire web app from scratch using the three primary Frontend languages.
+- Complete 6 iterations that match the provided comp from the project description.
 - Working between two different JavaScript files and using a class to structure the Data Model.
 - Using Event Delegation and Event Propagation to make features on the application dynamic.
 - Utilizing LocalStorage to save Activities and persist on refresh.
@@ -47,6 +49,7 @@ How we communicated with one another and organized each iteration.
 - Using event delegation on all pieces of the web app besides the original form.
 - Manipulating a timer clock that aligned both the data model and the DOM.
 - Utilizing localStorage to make unique activities persist on page load.
+- Added extra functionality that allows users to delete all past activities on button click.
 
 ## Contributors
 
