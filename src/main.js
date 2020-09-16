@@ -7,7 +7,6 @@ var mainTitle = document.querySelector('.main-title');
 var pastActivitiesSection = document.querySelector('.past-activities-section');
 var activityLog = document.querySelector('.activity-log');
 
-
 var currentActivity;
 var pastActivities = [];
 
@@ -37,70 +36,15 @@ function handleExerciseButton() {
   enableInputs();
 }
 
-function enableInputs() {
-  userInputs[0].disabled = false;
-  userInputs[1].disabled = false;
-  userInputs[2].disabled = false;
-}
-
-function resetButtonColor() {
-  for (var i = 0; i < categoryButton.length; i++) {
-    var defaultImages = ['./assets/study.svg', './assets/meditate.svg', './assets/exercise.svg'];
-    categoryButton[i].className = '';
-    categoryButton[i].classList.add('category-button');
-    categoryButton[i].children[1].className = '';
-    categoryButton[i].children[0].src = defaultImages[i];
-  }
-}
-
-function addButtonColor(selectedButton, selectedColor, selectedIcon) {
-  selectedButton.classList.add(selectedColor);
-  selectedButton.children[1].classList.add(selectedColor);
-  selectedButton.children[0].src = selectedIcon;
-}
-
 function validateSubmission() {
   clearErrors();
-  if (userInputs[0].value === '') {
+  if (userInputs[0].value === ''){
     showIntentionError();
-  } else if (userInputs[1].value === '' || userInputs[2].value === '') {
+  } else if (userInputs[1].value === '' || userInputs[2].value === ''){
     showTimeError();
   } else {
     convertCategory();
   }
-}
-
-function clearErrors() {
-  var newActivityCard = document.querySelector('.new-activity-card');
-  for (var i = 0; i < newActivityCard.children.length; i++) {
-    if (newActivityCard.children[i].className === 'error-message') {
-      newActivityCard.children[i].remove();
-      userInputs[0].classList.remove('error-pink');
-      userInputs[1].classList.remove('error-pink');
-      userInputs[2].classList.remove('error-pink');
-    }
-  }
-}
-
-function showIntentionError() {
-  var intentionError =
-    `<div class='error-message'>
-      <img src='./assets/warning.svg' class='error-icon'>
-      <p>A description is required.</p>
-    </div>`;
-  document.querySelector('.intention-section').insertAdjacentHTML('afterend', intentionError);
-  userInputs[0].classList.add('error-pink');
-}
-
-function showTimeError() {
-  var timeError =
-    `<div class='error-message'>
-      <img src='./assets/warning.svg' class='error-icon'>
-      <p>A time value in both fields is required.</p>
-    </div>`;
-  document.querySelector('.time-section').insertAdjacentHTML('afterend', timeError);
-  userInputs[1].classList.add('error-pink');
-  userInputs[2].classList.add('error-pink');
 }
 
 function convertCategory() {
@@ -126,6 +70,33 @@ function createNewActivity(activity, color, intention, mins, secs) {
   displayOriginalTimer();
 }
 
+function handleTimerCard(event) {
+  if (event.target.classList.contains('start-timer-button')){
+    setTimer();
+    event.target.disabled = true;
+  } else if (event.target.classList.contains('log-activity-button')){
+    updatePastActivities();
+  } else if (event.target.classList.contains('create-new-activity-button')){
+    returnToMain();
+  }
+}
+
+function setTimer() {
+  var timer = setInterval(updateTimeRemaining, 1000);
+
+  function updateTimeRemaining() {
+    currentActivity.startTimer();
+    displayActiveTimer();
+    currentActivity.countdownMinutes = parseInt(currentActivity.countdownMinutes);
+    currentActivity.countdownSeconds = parseInt(currentActivity.countdownSeconds);
+    if (currentActivity.countdownSeconds === 0 && currentActivity.countdownMinutes === 0){
+      clearInterval(timer);
+      displayFinishedTimer();
+      currentActivity.markComplete();
+    }
+  }
+}
+
 function displayOriginalTimer() {
   inputCard.classList.add('hidden');
   mainTitle.innerText = 'Current Activity';
@@ -139,69 +110,6 @@ function displayOriginalTimer() {
     </div>
   </article>`;
   timerCard.insertAdjacentHTML('beforeend', timerContent);
-}
-
-function alignTimerClock() {
-  currentActivity.countdownMinutes = parseInt(currentActivity.countdownMinutes);
-  currentActivity.countdownSeconds = parseInt(currentActivity.countdownSeconds);
-  if (currentActivity.countdownMinutes < 10) {
-    currentActivity.countdownMinutes = '0' + currentActivity.countdownMinutes;
-  }
-  if (currentActivity.countdownSeconds < 10) {
-    currentActivity.countdownSeconds = '0' + currentActivity.countdownSeconds;
-  }
-}
-
-function displayFinishedTimer() {
-  timerCard.innerHTML = '';
-  var finishedCard =
-  `<article class='light-grey first-card current-activity-card'>
-    <div class='timer-card'>
-      <p class='timer-description'>${currentActivity.description}</p>
-      <h1 class='timer-time'>00:00</h1>
-      <button class='start-timer-button ${currentActivity.categoryColor}'>COMPLETE!</button>
-      <button class='log-activity-button'>LOG ACTIVITY</button>
-    </div>
-  </article>`;
-  timerCard.insertAdjacentHTML('beforeend', finishedCard);
-}
-
-function handleTimerCard(event) {
-  if (event.target.classList.contains('start-timer-button')){
-    setTimer();
-    event.target.disabled = true;
-  } else if (event.target.classList.contains('log-activity-button')){
-    updatePastActivities();
-  } else if (event.target.classList.contains('create-new-activity-button')){
-    returnToMain();
-  }
-}
-
-function deletePastActivities(event) {
-  if (event.target.classList.contains('remove-activities-button')){
-    event.target.remove();
-    localStorage.clear();
-    activityLog.innerHTML = "";
-    var noActivityMessage =
-    `<div class="no-activity-message"><p>You haven't logged any activities yet.</p><p>Complete the form to the left to get started!</p></div>`;
-    activityLog.insertAdjacentHTML('afterbegin', noActivityMessage);
-  }
-}
-
-function setTimer() {
-  var timer = setInterval(updateTimeRemaining, 1000);
-
-  function updateTimeRemaining() {
-    currentActivity.startTimer();
-    displayActiveTimer();
-    currentActivity.countdownMinutes = parseInt(currentActivity.countdownMinutes);
-    currentActivity.countdownSeconds = parseInt(currentActivity.countdownSeconds);
-    if (currentActivity.countdownSeconds === 0 && currentActivity.countdownMinutes === 0) {
-      clearInterval(timer);
-      displayFinishedTimer();
-      currentActivity.markComplete();
-    }
-  }
 }
 
 function displayActiveTimer() {
@@ -218,10 +126,29 @@ function displayActiveTimer() {
   timerCard.insertAdjacentHTML('beforeend', timerContent);
 }
 
-function updatePastActivities() {
-  pastActivities.push(currentActivity);
-  currentActivity.saveToStorage();
-  displayCreateNew();
+function displayFinishedTimer() {
+  timerCard.innerHTML = '';
+  var finishedCard =
+  `<article class='light-grey first-card current-activity-card'>
+    <div class='timer-card'>
+      <p class='timer-description'>${currentActivity.description}</p>
+      <h1 class='timer-time'>00:00</h1>
+      <button class='start-timer-button ${currentActivity.categoryColor}'>COMPLETE!</button>
+      <button class='log-activity-button'>LOG ACTIVITY</button>
+    </div>
+  </article>`;
+  timerCard.insertAdjacentHTML('beforeend', finishedCard);
+}
+
+function alignTimerClock() {
+  currentActivity.countdownMinutes = parseInt(currentActivity.countdownMinutes);
+  currentActivity.countdownSeconds = parseInt(currentActivity.countdownSeconds);
+  if (currentActivity.countdownMinutes < 10){
+    currentActivity.countdownMinutes = '0' + currentActivity.countdownMinutes;
+  }
+  if (currentActivity.countdownSeconds < 10){
+    currentActivity.countdownSeconds = '0' + currentActivity.countdownSeconds;
+  }
 }
 
 function displayCreateNew() {
@@ -236,30 +163,68 @@ function displayCreateNew() {
   displayPastActivities();
  }
 
- function displayPastActivities() {
-   activityLog.innerHTML = '';
-   for (var i = 0; i < pastActivities.length; i++) {
-     var activityCard =
-     `<div class='past-activity-card light-grey'>
-       <div class='past-activity-border ${pastActivities[i].categoryColor}'></div>
-       <h4 class='past-activity-category'>${pastActivities[i].categoryName}</h4>
-       <h5 class='past-activity-time'>${pastActivities[i].minutes} MINS ${pastActivities[i].seconds} SECONDS</h5>
-       <p class='past-activity-description'>${pastActivities[i].description}</p>
-      </div>`;
-    activityLog.insertAdjacentHTML('afterbegin', activityCard);
-   }
-   var removeButton =
-   `<button class="remove-activities-button">REMOVE ACTIVITIES</button>`;
-   activityLog.insertAdjacentHTML('beforeend', removeButton);
- }
-
 function returnToMain() {
-  mainTitle.innerText = "New Activity";
+  mainTitle.innerText = 'New Activity';
   clearInputs();
   resetButtonColor();
   disableInputs();
   timerCard.innerHTML = '';
   inputCard.classList.remove('hidden');
+}
+
+function updatePastActivities() {
+  pastActivities.push(currentActivity);
+  currentActivity.saveToStorage();
+  displayCreateNew();
+}
+
+function retrieveFromStorage() {
+  var storedActivities = localStorage.getItem('storedActivities');
+  var parsedActivities = JSON.parse(storedActivities);
+  if (parsedActivities){
+    pastActivities = pastActivities.concat(parsedActivities);
+    displayPastActivities();
+  }
+}
+
+function displayPastActivities() {
+  activityLog.innerHTML = '';
+  for (var i = 0; i < pastActivities.length; i++) {
+    var activityCard =
+    `<div class='past-activity-card light-grey'>
+      <div class='past-activity-border ${pastActivities[i].categoryColor}'></div>
+      <h4 class='past-activity-category'>${pastActivities[i].categoryName}</h4>
+      <h5 class='past-activity-time'>${pastActivities[i].minutes} MINS ${pastActivities[i].seconds} SECONDS</h5>
+      <p class='past-activity-description'>${pastActivities[i].description}</p>
+     </div>`;
+   activityLog.insertAdjacentHTML('afterbegin', activityCard);
+  }
+  var removeButton =
+  `<button class='remove-activities-button'>REMOVE ACTIVITIES</button>`;
+  activityLog.insertAdjacentHTML('beforeend', removeButton);
+}
+
+function deletePastActivities(event) {
+  if (event.target.classList.contains('remove-activities-button')){
+    event.target.remove();
+    localStorage.clear();
+    activityLog.innerHTML = '';
+    var noActivityMessage =
+    `<div class='no-activity-message'><p>You haven't logged any activities yet.</p><p>Complete the form to the left to get started!</p></div>`;
+    activityLog.insertAdjacentHTML('afterbegin', noActivityMessage);
+  }
+}
+
+function enableInputs() {
+  userInputs[0].disabled = false;
+  userInputs[1].disabled = false;
+  userInputs[2].disabled = false;
+}
+
+function disableInputs() {
+  userInputs[0].disabled = true;
+  userInputs[1].disabled = true;
+  userInputs[2].disabled = true;
 }
 
 function clearInputs() {
@@ -269,17 +234,51 @@ function clearInputs() {
   userInputs[2].value = '';
 }
 
-function disableInputs() {
-  userInputs[0].disabled = true;
-  userInputs[1].disabled = true;
-  userInputs[2].disabled = true;
+function resetButtonColor() {
+  for (var i = 0; i < categoryButton.length; i++) {
+    var defaultImages = ['./assets/study.svg', './assets/meditate.svg', './assets/exercise.svg'];
+    categoryButton[i].className = '';
+    categoryButton[i].classList.add('category-button');
+    categoryButton[i].children[1].className = '';
+    categoryButton[i].children[0].src = defaultImages[i];
+  }
 }
 
-function retrieveFromStorage() {
-  var storedActivities = localStorage.getItem('storedActivities');
-  var parsedActivities = JSON.parse(storedActivities);
-  if (parsedActivities) {
-    pastActivities = pastActivities.concat(parsedActivities);
-    displayPastActivities();
+function addButtonColor(selectedButton, selectedColor, selectedIcon) {
+  selectedButton.classList.add(selectedColor);
+  selectedButton.children[1].classList.add(selectedColor);
+  selectedButton.children[0].src = selectedIcon;
+}
+
+function showIntentionError() {
+  var intentionError =
+    `<div class='error-message'>
+      <img src='./assets/warning.svg' class='error-icon'>
+      <p>A description is required.</p>
+    </div>`;
+  document.querySelector('.intention-section').insertAdjacentHTML('afterend', intentionError);
+  userInputs[0].classList.add('error-pink');
+}
+
+function showTimeError() {
+  var timeError =
+    `<div class='error-message'>
+      <img src='./assets/warning.svg' class='error-icon'>
+      <p>A time value in both fields is required.</p>
+    </div>`;
+  document.querySelector('.time-section').insertAdjacentHTML('afterend', timeError);
+  userInputs[1].classList.add('error-pink');
+  userInputs[2].classList.add('error-pink');
+}
+
+function clearErrors() {
+  var newActivityCard = document.querySelector('.new-activity-card');
+  for (var i = 0; i < newActivityCard.children.length; i++) {
+    if (newActivityCard.children[i].className === 'error-message'){
+      newActivityCard.children[i].remove();
+      userInputs[0].classList.remove('error-pink');
+      userInputs[1].classList.remove('error-pink');
+      userInputs[2].classList.remove('error-pink');
+    }
   }
 }
