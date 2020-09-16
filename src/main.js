@@ -21,19 +21,19 @@ window.addEventListener('load', retrieveFromStorage);
 function handleStudyButton() {
   resetButtonColor();
   addButtonColor(categoryButton[0], 'study-green', './assets/study-active.svg');
-  enableInputs();
+  toggleInputs();
 }
 
 function handleMeditateButton() {
   resetButtonColor();
   addButtonColor(categoryButton[1], 'meditate-purple', './assets/meditate-active.svg');
-  enableInputs();
+  toggleInputs();
 }
 
 function handleExerciseButton() {
   resetButtonColor();
   addButtonColor(categoryButton[2], 'exercise-red', './assets/exercise-active.svg');
-  enableInputs();
+  toggleInputs();
 }
 
 function validateSubmission() {
@@ -167,7 +167,7 @@ function returnToMain() {
   mainTitle.innerText = 'New Activity';
   clearInputs();
   resetButtonColor();
-  disableInputs();
+  toggleInputs();
   timerCard.innerHTML = '';
   inputCard.classList.remove('hidden');
 }
@@ -208,6 +208,7 @@ function deletePastActivities(event) {
   if (event.target.classList.contains('remove-activities-button')){
     event.target.remove();
     localStorage.clear();
+    pastActivities = [];
     activityLog.innerHTML = '';
     var noActivityMessage =
     `<div class='no-activity-message'><p>You haven't logged any activities yet.</p><p>Complete the form to the left to get started!</p></div>`;
@@ -215,16 +216,14 @@ function deletePastActivities(event) {
   }
 }
 
-function enableInputs() {
-  userInputs[0].disabled = false;
-  userInputs[1].disabled = false;
-  userInputs[2].disabled = false;
-}
-
-function disableInputs() {
-  userInputs[0].disabled = true;
-  userInputs[1].disabled = true;
-  userInputs[2].disabled = true;
+function toggleInputs() {
+  for (var i = 0; i < userInputs.length; i++) {
+    if (userInputs[i].disabled) {
+      userInputs[i].disabled = false;
+    } else {
+      userInputs[i].disabled = true;
+    }
+  }
 }
 
 function clearInputs() {
@@ -270,6 +269,7 @@ function showTimeError() {
   userInputs[1].classList.add('error-pink');
   userInputs[2].classList.add('error-pink');
 }
+
 
 function clearErrors() {
   var newActivityCard = document.querySelector('.new-activity-card');
