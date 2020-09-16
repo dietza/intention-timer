@@ -74,6 +74,6 @@ Contributors communicated mostly over Slack and collaborated over Tuple where we
 * [Allison Dietz](https://github.com/dietza)
 * [Alyssa Bull](https://github.com/alyssabull)
 * [JP Carey](https://github.com/jaypeasee)
-* [Heather Fearber](https://github.com/hfaerber) - Code Reviewer (Allison's Mentor)
+* [Heather Faerber](https://github.com/hfaerber) - Code Reviewer (Allison's Mentor)
 
 * [Will Mitchell](https://github.com/wvmitchell) - Project Manager
